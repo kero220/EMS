@@ -1,0 +1,148 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+}
+body {
+  background-color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("webapp_img/17973908.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+:root {
+  --first: #27374d;
+  --second: #526d82;
+  --third: #9db2bf;
+  --fourth: #dde6ed;
+}
+.welcome h3 {
+  margin-left: 30px;
+  margin-bottom: 10px;
+  color: var(--second);
+}
+
+.welcome p {
+  margin-bottom: 20px;
+  color: var(--third);
+  font-size: 14px;
+}
+.signin {
+  margin: auto;
+  max-width: 400px;
+  padding: 20px;
+  background-color: var(--third);
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 15%);
+  text-align: center;
+
+  box-shadow: 5px 5px 10px 2px rgb(188, 187, 187);
+}
+
+.image {
+  margin: 20px 0;
+}
+
+.image img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background-color: #e2e8f0;
+  object-fit: cover;
+  flex-wrap: wrap;
+}
+form {
+  margin: auto;
+  width: 40%;
+}
+
+.user_txt {
+  margin-bottom: 15px;
+  text-align: left;
+}
+label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  background-color: var(--fourth);
+}
+
+input::placeholder {
+  padding-left: 7px;
+}
+
+.remember_forget {
+  display: flex;
+  margin: 5px;
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+
+  padding-left: 15px;
+}
+.remember_forget input {
+  width: fit-content;
+  height: 40px;
+  margin-right: 2px;
+  align-content: center;
+
+  margin-bottom: 3px;
+}
+
+.remember_forget a {
+  color: var(--second);
+  text-decoration: none;
+}
+
+.remember_forget a:hover {
+  text-decoration: underline;
+}
+.signin .btn {
+  width: 50%;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: var(--second);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--first);
+}
+.welcome {
+  text-align: center;
+}
+.welcome p strong {
+  font-size: 30px;
+}
+.password_txt {
+  margin: 10px;
+}
+.password_txt label,
+.username_txt label {
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+
+.username_txt {
+  margin: 10px;
+}
