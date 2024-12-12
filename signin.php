@@ -1,6 +1,7 @@
 <?php
 require_once "conn.php";
 require_once "token.php";
+session_start();
 
 
 ?>
@@ -47,21 +48,14 @@ require_once "token.php";
          </div>
          <!----------------------------check box-------------------------------->
          <div class="remember_forget">
-            <input type="checkbox" name="remember" value="<?php isset($_COOKIE['token']) ? 'checked' : '' ?>">
+            <input type="checkbox" name="remember" value="<?php echo isset($_COOKIE['token']) ? 'checked' : '' ?>">
             <label>Remember Me</label>
          </div>
          <!----------------------------signin button-------------------------------->
          <input type="submit" name="submit" value="Signin" class="btn">
          <br>
-
-
-
       </div>
-
    </form>
-
-
-
 </body>
 
 </html>
@@ -75,12 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
     $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
 
-    if (!isset($_COOKIE["token"])){
-      $hash = hash('sha256', $password);
-    }
-    else {
-      $hash = $password;
-    }
+    $hash = hash('sha256', $password);
 
 
     // DISPLAY DATA FROM DB
@@ -109,36 +98,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         setcookie("token", "$selector:$hashed_validator", strtotime("+1 hour"), "/");
 
-
-        # $_SESSION['username'] = $username;
-        # $_SESSION['password'] = $hash;
       } else {
         setcookie("token", "$selector:$hashed_validator", time() - 1, "/");
       }
 
 
-      if (!isset($_SESSION['session_id'])) {  // first time login using session[time] + add function that create this session after the login only
-        session_start();
-        session_regenerate_id(true);;
+      if (isset($_SESSION['time'])) {  // first time login using session[time] + add function that create this session after the login only
+        session_regenerate_id(true);
         $_SESSION["session_id"] = session_create_id();
         $_SESSION['emp_id'] = $rs['emp_id'];
         $_SESSION['active'] = true;
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
         $_SESSION['hash'] = $hash;
-        $_SESSION['time'] = time();
         update_emp_status($rs['emp_id'], $_SESSION['active'], $pdo);
       } else {
-          if(time() - $_SESSION['last_regeneration'] >= 1800){  // expire after 30 min
-            session_start();
+          if(time() - $_SESSION['time'] >= 1800){  // expire after 30 min
             session_regenerate_id(true);
-            $_SESSION['last_regeneration'] = session_create_id();  // change 'last_generation' with 'time'
+            $_SESSION['time'] = time();  // change 'last_generation' with 'time'
           }
       }
 
       $pdo = NULL;
       $stmt = NULL;
       header('Location:templet.php');
+      $_SESSION['time'] = time();
       exit;
     } else {
 
