@@ -16,8 +16,18 @@ $options = [
 
 try {
 
-  $pdo = new Pdo($dsn, $user, $pass, $options);
-} catch (PDOException $e) {
-
-  throw new PDOException($e->getMessage(), $e->getCode());
+  $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (PDOEXCEPTION $e) {
+  echo "Connection Failed: " . $e->getMessage();
 }
+
+$DSN = 'mysql: host=localhost; dbname=myfirstdb';  // Data Source Name
+$dbUsername = 'root';
+$dbPassword = '';
+
+// try {
+//    $PDO = new PDO($DSN, $dbUsername, $dbPassword);  // PHP Data Object
+//    $PDO -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// } catch(PDOEXCEPTION $error){
+//    echo "Connection Failed: " . $error->getMessage();
+// }
