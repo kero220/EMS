@@ -1,5 +1,5 @@
 <?php
-$server = "localhost";
+$server = "localhost:3307";
 $dp = "ems_db";
 $user = "root";
 $pass = "";

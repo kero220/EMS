@@ -146,3 +146,38 @@ input::placeholder {
 .username_txt {
   margin: 10px;
 }
+.error {
+  letter-spacing: 1px;
+  color: red;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  font-size: medium;
+  text-align: center;
+  font_weight: 10px;
+  border: 2px solid;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px 2px rgb(188, 187, 187);
+  padding: 2px;
+
+  animation-name: omar;
+  animation-duration: 1s;
+}
+
+@keyframes omar {
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
