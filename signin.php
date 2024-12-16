@@ -1,15 +1,17 @@
 <?php
 require_once "conn.php";
 require_once "token.php";
+?>
 
+<?php
 #_________following code must be in all pages__________
 
 date_default_timezone_set("Africa/Cairo"); # set time() to egypt timestamp
 session_start(); #to get session permission
 # check security
 
-if (isset($_COOKIE['token'])) {
-  if (is_token_expired($_COOKIE['token'], $pdo)) { # if cookie exist .. will check the expiration
+if (isset($_COOKIE['token'])) { # if cookie exist
+  if (is_token_expired($_COOKIE['token'], $pdo)) { #check the expiration
     $_SESSION['active'] = "not_active";
 
     update_emp_status($_SESSION['emp_id'], $_SESSION['active'], $pdo);
@@ -23,19 +25,16 @@ if (isset($_COOKIE['token'])) {
 
     setcookie("token", "", time() - 1, "/"); #expire cookie and token and delete from browser
 
-
+    # ******ADD POPUP HERE FOR SESSION EXPIRATION******
     header("location: signin.php");
     exit;
   }
-  echo "no cookie set";
+  // echo "no cookie set";
 }
 
-
-
-
-
-
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -171,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
       #session_regenerate_id();
       $pdo = null;
-      header('Location:templet.php');
+      header('Location:template.php');
       exit;
   
     } else {

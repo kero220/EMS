@@ -1,18 +1,14 @@
 <?php
 require_once "conn.php";
 
-function generate_tokens()
-{
-
-
+function generate_tokens(){
 
   $selector = bin2hex(random_bytes(16));
   $validator = bin2hex(random_bytes(32)); #convert bytes to hexa
   return array($selector, $validator);
 }
 #----------------------------------------------------------------
-function divide_token($token)
-{
+function divide_token($token){
 
   $parts = explode(":", $token);
   if ($parts && count($parts) == 2) {
@@ -20,11 +16,10 @@ function divide_token($token)
   }
   return null;
 }
+
 #----------------------------------------------------------------
 
-function insert_token($selector, $hashed_validator, $expire, $emp_id, $pdo)
-{
-
+function insert_token($selector, $hashed_validator, $expire, $emp_id, $pdo){
 
   $sql = "insert into user_tokens (selector,hashed_validator,expire,emp_id) values(:s,:v,:ex,:emp)";
   $stmt = $pdo->prepare($sql);
@@ -38,23 +33,21 @@ function insert_token($selector, $hashed_validator, $expire, $emp_id, $pdo)
 
   return $stmt->execute(); # return $stmt->execute(); also true 
 }
+
 #----------------------------------------------------------------
-function find_token_by_emp_id($emp_id, $pdo)
-{
+function find_token_by_emp_id($emp_id, $pdo){
 
   $sql = "select selector , hashed_validator , expire , token_id , emp_id from user_tokens where emp_id=:e and expire > now()";
   $stmt = $pdo->prepare($sql);
   $stmt->bindParam(':e', $emp_id, PDO::PARAM_STR);
 
-
   $stmt->execute();
   $result = $stmt->fetch();
   return $result;
 }
-#----------------------------------------------------------------
-function delete_token($emp_id, $pdo)
-{
 
+#----------------------------------------------------------------
+function delete_token($emp_id, $pdo){
 
   $sql = "delete from user_tokens where emp_id=:e ";/*all tokens of user*/
 
@@ -67,8 +60,7 @@ function delete_token($emp_id, $pdo)
 }
 
 #----------------------------------------------------------------
-function find_username_by_token($token, $pdo)
-{
+function find_username_by_token($token, $pdo){
 
   if (!$token) {
     return false;
@@ -98,8 +90,7 @@ function find_username_by_token($token, $pdo)
 #----------------------------------------------------------------
 
 #----------------------------------------------------------------
-function valid_token($token, $pdo)
-{
+function valid_token($token, $pdo){
 
   if (!$token) return false;
   #$rs = find_token_by_selector($token[0], $pdo);
@@ -107,8 +98,7 @@ function valid_token($token, $pdo)
 }
 #----------------------------------------------------------------
 
-function update_emp_status($emp_id, $flag, $pdo)
-{
+function update_emp_status($emp_id, $flag, $pdo){
 
   $sql = "UPDATE employees SET active_flag = :a WHERE emp_id = :u";
   $stmt = $pdo->prepare($sql);
@@ -118,8 +108,7 @@ function update_emp_status($emp_id, $flag, $pdo)
 }
 #----------------------------------------------------------------
 
-function find_password_by_token($token, $pdo)
-{
+function find_password_by_token($token, $pdo){
 
   if (!$token) {
     return false;
@@ -138,19 +127,14 @@ function find_password_by_token($token, $pdo)
   $stmt->bindParam(':v', $parts[1], PDO::PARAM_STR);
   $stmt->execute();
   $rs = $stmt->fetch();
+
   if (!$rs) {
     return false;  // Return false if no username found
   }
-
-
   return $rs['password'];
 }
 #---------------------------------------------------------------
-function find_all_employees_columns($username, $password, $pdo)
-{
-
-
-
+function find_all_employees_columns($username, $password, $pdo){
 
   $sql = "SELECT * FROM employees WHERE username =:u AND password =:p";
   $stmt = $pdo->prepare($sql);
@@ -162,15 +146,10 @@ function find_all_employees_columns($username, $password, $pdo)
 
 
 
-
-
-
 #______________________________________________________________________
-function is_token_expired($token, $pdo)
-{
+function is_token_expired($token, $pdo){
 
   $parts = divide_token($token);
-
 
   $sql = "select expire from user_tokens where selector=:s and hashed_validator =:v";
   $stmt = $pdo->prepare($sql);
@@ -190,16 +169,16 @@ function is_token_expired($token, $pdo)
 
   for ($i = 0; $i < strlen($rs['expire']); $i++) { #YYYY-MM-DD HH:MM:SS;
 
-    if ($rs['expire'][$i] == " " || $rs['expire'][$i] == "-" || $rs['expire'][$i] == ":") {
-
+    if ($rs['expire'][$i] == " " || $rs['expire'][$i] == "-" || $rs['expire'][$i] == ":")
       continue;
-    }
-    echo intval($now[$i]) - intval($rs['expire'][$i]);
-    if ((intval($now[$i]) - intval($rs['expire'][$i]))   > 0) { # if now - expiredate is negative so token not expired
+    
+    echo intval($now[$i]) - intval($rs['expire'][$i]);  # date_diff(intval($now[$i]), intval($rs['expire'][$i])
 
+    if ((intval($now[$i]) - intval($rs['expire'][$i])) > 0) { # if positive so token expired
       $is_expired = 1;
       break;
-    } elseif ((intval($now[$i]) - intval($rs['expire'][$i])) < 0) {
+      
+    } else {
       $is_expired = 0;
       break;
     }
@@ -207,11 +186,12 @@ function is_token_expired($token, $pdo)
   #echo $is_expired;
   return $is_expired;
 }
-#----------------------------------------------------------------
-function update_token_status($token, $flag, $pdo)
-{
-  $parts = divide_token($token);
 
+#----------------------------------------------------------------
+function update_token_status($token, $flag, $pdo){
+  
+  $parts = divide_token($token);
+  
   $sql = "UPDATE user_tokens SET is_expired =:e WHERE selector =:s and hashed_validator=:v";
   $stmt = $pdo->prepare($sql);
   $stmt->bindParam(':e', $flag, PDO::PARAM_STR);
@@ -219,21 +199,22 @@ function update_token_status($token, $flag, $pdo)
   $stmt->bindParam(':v', $parts[1], PDO::PARAM_STR);
   $stmt->execute();
 }
-function search_about_hash($username, $password, $pdo)
-{
+
+#----------------------------------------------------------------
+function search_about_hash($username, $password, $pdo){
+  
   $sql = "SELECT password FROM employees WHERE password =:p and username=:u";
   $stmt = $pdo->prepare($sql);
-
+  
   $stmt->bindParam(':p', $password, PDO::PARAM_STR);
   $stmt->bindParam(':u', $username, PDO::PARAM_STR);
   $stmt->execute();
-
+  
   return $stmt->fetch();
 }
-function get_last_connection_of_user($emp_id, $pdo)
-{
 
-
+#----------------------------------------------------------------
+function get_last_connection_of_user($emp_id, $pdo){
 
   $sql = "SELECT selector,hashed_validator ,expire FROM user_tokens WHERE emp_id=:e order by  expire desc limit 1;";
   $stmt = $pdo->prepare($sql);
@@ -244,4 +225,5 @@ function get_last_connection_of_user($emp_id, $pdo)
   $rs = $stmt->fetch();
   return $rs['selector'] . ":" . $rs['hashed_validator'];
 }
+
 ?>
