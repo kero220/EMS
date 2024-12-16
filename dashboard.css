@@ -1,0 +1,82 @@
+@import url(Stemplet.css);
+
+.dashboard_link {
+  color: var(--secound);
+}
+#container {
+  overflow: auto;
+}
+#about {
+  max-width: 62rem;
+  background-color: var(--fourth);
+}
+#mainH1 {
+  background-color: var(--fourth);
+}
+#container {
+  background-color: var(--fourth);
+  max-height: auto;
+  height: 100%;
+  color: var(--first);
+  width: 100%;
+}
+#right{
+  margin-bottom: 70px;
+}
+#leftP2 {
+  font-weight: 600;
+}
+#tableWrapper {
+  overflow: auto;
+  max-height: 25rem;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+#tableDiv span {
+  background-color: #526d82;
+  color: white;
+}
+#tableDiv h1 {
+  color: #9db2bf;
+}
+table tr {
+  border-bottom: 1px;
+  text-align: center;
+  border-color: rgb(187, 177, 177);
+  border-style: solid;
+  height: 3rem;
+}
+#tableBtn {
+  background-color: #29cacc;
+  padding: 2px;
+}
+#tableBtn:active {
+  border-color: white;
+  box-shadow: none;
+  border-style: none;
+}
+
+#name {
+  color: rgb(79, 79, 238);
+}
+#tableBtn {
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  padding: 2px;
+}
+#tableBtn:hover {
+  opacity: 80%;
+}
+.active {
+  border-radius: 15px;
+  padding: 2px;
+  background-color: rgb(9, 149, 9);
+}
+.inactive {
+  border-radius: 15px;
+  padding: 2px;
+  background-color: red;
+}

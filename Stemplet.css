@@ -25,8 +25,15 @@ body {
     display: flex;
     width: 100%;
     height: auto;
-    min-height:100% ;
+    min-height: 100%;
 
+}
+
+label {
+    color: var(--third);
+    font-weight: bold;
+    text-transform: capitalize;
+    font-family: sans-serif;
 }
 
 .list {
@@ -37,14 +44,17 @@ body {
     background-color: var(--first);
     padding-top: 5%;
 }
-a{
+
+a {
     font-family: Arial, Helvetica, sans-serif;
-    color: var(--third);  
+    color: var(--third);
     margin: 5% 20px;
 }
-a:hover{
-    color: var(--secound);  
+
+a:hover {
+    color: var(--secound);
 }
+
 #linksList {
     display: none;
     margin-top: 10px;
@@ -60,9 +70,19 @@ a:hover{
     color: var(--third);
 }
 
-.list #linksList a:hover {
+a:visited {
+    color: var(--third);
+}
+
+
+a:hover {
     color: var(--secound);
 }
+
+.list #linksList a:hover {
+    color: var(--secound)
+}
+
 
 
 .content {
@@ -70,7 +90,7 @@ a:hover{
     flex-direction: column;
     width: 80%;
     height: auto;
-    background-color:var(--fourth) ;
+    background-color: var(--fourth);
 }
 
 header {
@@ -108,10 +128,14 @@ header img {
     width: 40px;
     margin: 5px;
 }
-section{
-height: 86%;
+
+section {
+    width: 100%;
+    min-height: 86%;
+    max-height: auto;
 }
-footer{
+
+footer {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -120,6 +144,7 @@ footer{
     z-index: 999;
     height: 7%;
 }
+
 .Fnavbar {
     display: flex;
     align-items: center;
@@ -132,6 +157,7 @@ footer{
     transform: 1s;
     position: relative;
 }
+
 .Fnavbar a::before {
     width: 0;
     left: 0;
@@ -149,10 +175,12 @@ footer{
 
 
 }
-.Fnavbar a:hover::before{
-    width: 100%;
 
+.Fnavbar a:hover::before {
+    width: 100%;
+    color: var(--secuond);
 }
+
 .copyright {
     font-size: 14px;
     text-align: center;

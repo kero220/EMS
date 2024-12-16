@@ -1,0 +1,80 @@
+@import url(Stemplet.css);
+
+#container {
+    background-color: var(--fourth);
+    max-width: 80%;
+    border-radius: 10px;
+    height: 42rem;
+    color: var(--secound);
+}
+
+#addBtn {
+    background-color: var(--secound);
+}
+
+#table tr {
+    border-bottom: 2px;
+
+    border-style: solid;
+    border-color: var(--fourth);
+}
+
+#status {
+    background-color: #55ff66;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    margin-left: 8px;
+}
+
+#approveBtn:hover {
+    opacity: 80%;
+}
+
+#approveBtn {
+    border: 2px;
+    border-style: solid;
+    border-color: var(--fourth);
+    margin: 4px;
+    border-radius: 4px;
+}
+
+#declineBtn {
+    border: 2px;
+    border-style: solid;
+    border-color: var(--fourth);
+    margin: 4px;
+    border-radius: 4px;
+}
+
+#declineBtn:hover {
+    opacity: 80%;
+}
+
+#tableWrapper h1 {
+    color: var(--fourth);
+}
+
+#tableWrapper {
+    overflow: auto;
+    height: 85%;
+}
+
+#addreviewBtn:hover {
+    opacity: 80%;
+}
+
+#columnSelection {
+    border-radius: 5px;
+    border-color: var(--secound);
+}
+
+#columnSelection:visited {
+    border-color: var(--secound);
+}
+#table th,td{
+    color: var(--secound);
+}
+::-webkit-scrollbar {
+    width: 10px;
+}

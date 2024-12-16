@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
 
 
-      if (isset($_SESSION['time'])) {  // first time login using session[time] + add function that create this session after the login only
+      if (isset($_SESSION['time'])) {  // first time login using session[time]
         session_regenerate_id(true);
         $_SESSION["session_id"] = session_create_id();
         $_SESSION['emp_id'] = $rs['emp_id'];

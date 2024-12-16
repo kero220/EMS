@@ -1,0 +1,64 @@
+@import url(Stemplet.css);
+#container {
+    background-color: var(--fourth);
+    max-width: 80%;
+    border-radius: 10px;
+    height: 42rem;
+    color:var(--secound) ;
+  }
+  #btnAdd{
+    background-color: var(--secound);
+    padding: 0 20;
+  }
+  #btnAdd:hover{
+    background-color: var(--third);
+    padding: 0 20;
+  }
+  #wrapper {
+    padding: 4px;
+    background-color: white;
+    height: 80%;
+    overflow: auto;
+  }
+  #table {
+    background-color: white;
+    text-align: center;
+  }
+  #attendanceBtn {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  #attendanceBtn input {
+    accent-color: var(--secound);
+    margin: 4px;
+    cursor: pointer;
+  }
+  #table tr td,
+  th {
+    border: 2px;
+    min-width: 40px;
+    border-style: solid;
+    border-color:var(--secound);
+    color: var(--secound);
+  }
+  #table tr {
+    border-bottom: 2px;
+
+    border-style: solid;
+    border-color: var(--third);
+  }
+
+  #image {
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    background-color: var(--secound);
+  }
+  #wrapper p {
+    color: var(--third);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }

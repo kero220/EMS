@@ -1,0 +1,63 @@
+@import url(Stemplet.css);
+#container {
+    background-color: var(--fourth);
+    max-width: 80%;
+    border-radius: 10px;
+    height: 42rem;
+    color: var(--secound);
+  }
+  #addBtn{
+    background-color: var(--secound);
+  }
+  #columnSelection{
+    border-radius: 5px;
+    border-color: var(--secound);
+  }
+  #columnSelection:visited{
+    border-color: var(--secound);
+  }
+  #table tr {
+    border-bottom: 2px;
+    border-style: solid;
+    border-color: var(--third);
+  }
+  #table td,th{
+    color: var(--secound);
+  }
+  #dateData {
+    color: var(--secound);
+    border-radius: 6px;
+  }
+  #tableWrapper h1 {
+    color: var(--third);
+  }
+
+  #tableWrapper {
+    overflow: auto;
+    height: 85%;
+  }
+  #approveBtn {
+    border: 2px;
+    border-style: solid;
+    border-color: var(--fourth);
+    margin: 4px;
+    border-radius: 4px;
+  }
+  #declineBtn {
+    border: 2px;
+    border-style: solid;
+    border-color: var(--fourth);
+    margin: 4px;
+    border-radius: 4px;
+  }
+  #addreviewBtn {
+    border: 2px;
+    border-style: solid;
+    border-color: var(--fourth);
+    margin: 4px;
+    border-radius: 4px;
+  }
+ 
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
