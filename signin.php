@@ -40,11 +40,11 @@ if (isset($_COOKIE['token'])) {
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EMS</title>
-  <link rel="icon" href="webapp_img\employee-management-system-icon-hexa-color-_27374D-_1_ (1).ico" type="image/ico">
-  <link rel="stylesheet" href="signin.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>EMS</title>
+   <link rel="icon" href="webapp_img\employee-management-system-icon-hexa-color-_27374D-_1_ (1).ico" type="image/ico">
+   <link rel="stylesheet" href="signin.css">
 
 </head>
 
@@ -52,44 +52,45 @@ if (isset($_COOKIE['token'])) {
 
 
 
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-    <div class="welcome">
-      <p><strong>Welcome Back</strong><br>Sign In To Your Account To Continue</p>
+   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+      <div class="welcome">
+         <p><strong>Welcome Back</strong><br>Sign In To Your Account To Continue</p>
 
-    </div>
-    <div class="signin"> <!--Sign in div-->
-      <!----------------------------image-------------------------------->
-      <div class="image">
-        <img src="webapp_img/user.png" alt="user photo">
       </div>
-      <!----------------------------username field-------------------------------->
-      <div class="username_txt">
-        <!-- <label for="username">Username</label> -->
-        <input type="text" name="username" id="username" placeholder="Username" value="<?php if (isset($_COOKIE['token'])) {
+      <div class="signin">
+         <!--Sign in div-->
+         <!----------------------------image-------------------------------->
+         <div class="image">
+            <img src="webapp_img/user.png" alt="user photo">
+         </div>
+         <!----------------------------username field-------------------------------->
+         <div class="username_txt">
+            <!-- <label for="username">Username</label> -->
+            <input type="text" name="username" id="username" placeholder="Username" value="<?php if (isset($_COOKIE['token'])) {
                                                                                           echo find_username_by_token($_COOKIE['token'], $pdo);
                                                                                         }   ?>">
-      </div>
-      <!----------------------------password field-------------------------------->
-      <div class="password_txt">
-        <!-- <label for="password">Password</label> -->
-        <input type="password" name="password" id="password" placeholder="Password" value="<?php if (isset($_COOKIE['token'])) {
+         </div>
+         <!----------------------------password field-------------------------------->
+         <div class="password_txt">
+            <!-- <label for="password">Password</label> -->
+            <input type="password" name="password" id="password" placeholder="Password" value="<?php if (isset($_COOKIE['token'])) {
                                                                                               echo find_password_by_token($_COOKIE['token'], $pdo);
                                                                                             }   ?>">
+         </div>
+         <!----------------------------check box-------------------------------->
+         <div class="remember_forget">
+            <input type="checkbox" name="remember">
+            <label>Remember Me</label>
+         </div>
+         <!----------------------------signin button-------------------------------->
+         <input type="submit" name="submit" value="Sign In" class="btn">
+         <br>
+
+
+
       </div>
-      <!----------------------------check box-------------------------------->
-      <div class="remember_forget">
-        <input type="checkbox" name="remember">
-        <label>Remember Me</label>
-      </div>
-      <!----------------------------signin button-------------------------------->
-      <input type="submit" name="submit" value="Sign In" class="btn">
-      <br>
 
-
-
-    </div>
-
-  </form>
+   </form>
 
 
 
@@ -143,13 +144,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $validator = $token[1];
         $hashed_validator = hash('sha256', $validator);
 
-        $expire = date('Y-m-d H:i:s', time() + 5);
+        $expire = date('Y-m-d H:i:s', strtotime("+1 hour"));
         insert_token($selector, $hashed_validator, $expire, $rs['emp_id'], $pdo);
 
-        setcookie("token", "$selector:$hashed_validator", time() + 3600, "/");
+        setcookie("token", "$selector:$hashed_validator", strtotime("+2 hour"), "/");
       }
       if (empty($_SESSION['session_id'])) { # if session has created and has id when username 
-        #and password  are correct according to db
+        #and password are correct according to db
 
         #session_regenerate_id(true);
         #session_name()
@@ -166,18 +167,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['pat'] = $_SERVER["REMOTE_ADDR"] . ":" . $_SERVER['REMOTE_PORT'];
         $_SESSION['REMOTE_USER'] = $_SERVER['REMOTE_USER'];
 
-
-
-
-
         update_emp_status($rs['emp_id'], $_SESSION['active'], $pdo);
       }
       #session_regenerate_id();
       $pdo = null;
       header('Location:templet.php');
       exit;
+  
     } else {
-
 
       echo "<div class='error' >";
       echo "Invalid Username or Password , Please Try Again";

@@ -1,4 +1,3 @@
-
 <?php
 require_once "conn.php";
 
@@ -131,7 +130,7 @@ function find_password_by_token($token, $pdo)
             FROM employees e 
             left  JOIN user_tokens u ON e.emp_id = u.emp_id
             WHERE u.selector =:s AND
-               u.hashed_validator=:v and u.expire > now()";
+              u.hashed_validator=:v and u.expire > now()";
 
   $stmt = $pdo->prepare($sql);
 
