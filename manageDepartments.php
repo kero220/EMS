@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Employees</title>
+    <title>Manage Departments</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-    <link rel="stylesheet" href="manageEmployee.css">
+    <link rel="stylesheet" href="manageDepartments.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet" />
 
 </head>
@@ -26,9 +26,9 @@
             <!----employee managment---->
             <a href="#" class="mainLink block">Employee Managment</a>
             <div id="linksList">
-                <a href="manageEmployee"><i class="fa-solid fa-users-viewfinder"></i> Manage Employees</a>
+                <a href="manageEmployee.php"><i class="fa-solid fa-users-viewfinder"></i> Manage Employees</a>
                 <a href="manageDepartments.php"><i class="fa-solid fa-users-gear"></i> Manage Departments</a>
-                <a href="manageDesignation"><i class="fa-solid fa-file"></i> Manage Designations</a>
+                <a href="manageDesignation.php"><i class="fa-solid fa-file"></i> Manage Designations</a>
             </div>
             <!----attendance---->
             <a href="#" class="mainLink block">Attendance</a>
@@ -56,16 +56,16 @@
 
             </header>
             <section>
-                <div id="container" class="p-4 text-left m-auto ">
+                <div id="container" class="p-4 text-left m-auto">
                     <form id="manageEmployeesForm" class="flex flex-col gap-4 h-full max-h-auto min-w-auto">
                         <div class="flex justify-between mb-4">
-                            <h1 id="myH1" class="text-2xl">Manage Employees</h1>
+                            <h1 id="myH1" class="text-2xl">Manage Departments</h1>
                             <button id="addBtn" class=" p-2 rounded-lg text-white font-bold">
-                                + Add Users
+                                + Add Department
                             </button>
                         </div>
                         <div id="tableWrapper" class="bg-white h-5/6 p-4 rounded-t-lg">
-                            <h1 class="text-base mb-2">User dashboard</h1>
+                            <h1 class="text-base mb-2">Department dashboard</h1>
                             <div class="flex justify-between mb-2">
                                 <p>
                                     Show
@@ -84,26 +84,27 @@
                             <table id="table" class="w-full min-h-[5rem]">
                                 <thead class="m-2">
                                     <tr class="text-center">
-                                        <th class="min-w-12">Id</th>
-                                        <th class="min-w-[3rem]">Name</th>
-                                        <th>Department</th>
-                                        <th>Hire Date</th>
-                                        <th>Position</th>
+                                        <th>Department Id</th>
+                                        <th class="max-w-[10rem]">Department Name</th>
+                                        <th>Manager Id</th>
+                                        <th>Stablish Date</th>
+                                        <th>Number of employees</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-center">
                                     <tr>
                                         <td>1</td>
-                                        <td>Kerolos Soliman</td>
+
                                         <td>Benha Branch</td>
+                                        <td>123456</td>
                                         <td>
                                             <div id="dateData">1/2/2024</div>
                                         </td>
-                                        <td>IT</td>
+                                        <td>100</td>
                                         <td id="actionBtn">
-                                            <button id="approveBtn"><a href="editUser.php" class="m-0"
-                                                    alt="edit employee">🖋️</a></button>
+                                            <button id="approveBtn"><a href="editDepartment.php" class="m-0"
+                                                    alt="edit department">🖋️</a></button>
                                             <button id="addreviewBtn"><a href="#" class="m-0"
                                                     alt="add review">⭐</i></a></button>
                                             <button id="declineBtn" alt="delete employee">❌</button>
@@ -113,7 +114,7 @@
                             </table>
                         </div>
                         <footer class="flex justify-between bg-white border-t-2 p-2 rounded-b-lg">
-                            <p>List of users</p>
+                            <p>List of Departments</p>
                             <p>Page <span>1</span></p>
                         </footer>
                     </form>

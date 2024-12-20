@@ -1,4 +1,4 @@
-@import url(Stemplet.css);
+@import url(Stemplate.css);
 #image input span {
     color: red;
   }
@@ -21,7 +21,12 @@
   #submitBtn:hover {
     opacity: 90%;
   }
-
+  span{
+    color: var(--first);
+  }
+  #checkDiv{
+    margin-left: 20px;
+  }
   #submitBtn:active {
     border: 2px;
     border-style: solid;

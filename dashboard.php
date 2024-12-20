@@ -11,38 +11,43 @@
 
 <body>
     <div class="page">
-        <div class="list">
-            <a href="dashboard.php" class="dashboard_link"><i class="fa-solid fa-sliders"></i> Dashboard</a>
+        <button class="text-red-500 absolute top-3 left-2 z-20  rounded-lg p-2" id="hideShowBtn" onclick="myFunction()">
+            <div><img src="pngegg.png" alt=""></div>
+        </button>
+        <div class="list" id="myDIV">
+            <a href="dashboard.php" class="dashboard_link block"><i class="fa-solid fa-sliders"></i> Dashboard</a>
             <!----user managment---->
-            <a href="#" class="mainLink">User Managment</a>
-            <div id="linksList">
-                <a href="manageUser.php"  ><i class="fa-solid fa-user"></i> Manage User</a>
-                <a href="addUser.php"  ><i class="fa-solid fa-gears"></i> Add User</a>
+            <a href="#" class="mainLink block">User Managment</a>
+            <div id="linksList" class="block">
+                <a href="manageUser.php"><i class="fa-solid fa-user"></i> Manage User</a>
+                <a href="addUser.php"><i class="fa-solid fa-gears"></i> Add User</a>
             </div>
             <!----employee managment---->
-            <a href="#" class="mainLink">Employee Managment</a>
+            <a href="#" class="mainLink block">Employee Managment</a>
             <div id="linksList">
-                <a href="#"  ><i class="fa-solid fa-users-viewfinder"></i> Manage Employees</a>
-                <a href="manageEmployee.php"  ><i class="fa-solid fa-users-gear"></i> Manage Departments</a>
-                <a href="#"  ><i class="fa-solid fa-file"></i> Manage Designations</a>
+                <a href="manageEmployee.php"><i class="fa-solid fa-users-viewfinder"></i> Manage Employees</a>
+                <a href="manageDepartments.php"><i class="fa-solid fa-users-gear"></i> Manage Departments</a>
+                <a href="manageDEsignation.php"><i class="fa-solid fa-file"></i> Manage Designations</a>
             </div>
             <!----attendance---->
-            <a href="#" class="mainLink">Attendance</a>
+            <a href="#" class="mainLink block">Attendance</a>
             <div id="linksList">
-                <a href="Schedule.php"  ><i class="fa-solid fa-clock"></i> Schedule</a>
-                <a href="dailyAttendance.php"  ><i class="fa-solid fa-calendar-days"></i> Daily Attendance</a>
-                <a href="#"  ><i class="fa-solid fa-book"></i> Sheet Report</a>
+                <a href="Schedule.php"><i class="fa-solid fa-clock"></i> Schedule</a>
+                <a href="dailyAttendance.php"><i class="fa-solid fa-calendar-days"></i> Daily Attendance</a>
+                <a href="attendanceSheet.php"><i class="fa-solid fa-book"></i> Sheet Report</a>
             </div>
             <!----leave managment---->
-            <a href="#" class="mainLink">Leave Managment</a>
+            <a href="#" class="mainLink block">Leave Managment</a>
             <div id="linksList">
-                <a href="#"  ><i class="fa-solid fa-arrow-right-from-bracket"></i> Manage Leaves</a>
+                <a href="manageLeave.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Manage Leaves</a>
+                <a href="leaveRequest.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Leave Request</a>
             </div>
         </div>
 
-        <div class="content">
-            <header>
-                <a href="#"><i class="fa-solid fa-plus"></i> New Item</a>
+        <div class="content w-full ">
+            <header class="z-10">
+
+                <a href="#"><i class="fa-solid fa-plus ml-8"></i> New Item</a>
                 <div class="navbar flex items-center gap-4">
                     <img src="user.png" alt="User Icon" class="w-10">
                     <label for="username">User_name</label>
@@ -90,8 +95,8 @@
                             </div>
                         </div>
                         <div id="right" class="col-span-2 text-[#27374d]">
-                            <div id="tableWrapper" class="bg-white rounded-md p-2">
-                                <div id="tableDiv" class="flex justify-between mb-4 overflow-auto">
+                            <div id="tableWrapper" class="bg-white rounded-md p-2 overflow-auto">
+                                <div id="tableDiv" class="flex justify-between mb-4">
                                     <h1>Employee</h1>
                                     <span class="text-white p-2 rounded-lg">Status</span>
                                 </div>
@@ -106,6 +111,50 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td id="name">Mohamed</td>
+                                            <td>
+                                                <div class="active">Active</div>
+                                            </td>
+                                            <td>5</td>
+                                            <td>
+                                                <button id="tableBtn">Review</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td id="name">Mohamed</td>
+                                            <td>
+                                                <div class="active">Active</div>
+                                            </td>
+                                            <td>5</td>
+                                            <td>
+                                                <button id="tableBtn">Review</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td id="name">Mohamed</td>
+                                            <td>
+                                                <div class="active">Active</div>
+                                            </td>
+                                            <td>5</td>
+                                            <td>
+                                                <button id="tableBtn">Review</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td id="name">Mohamed</td>
+                                            <td>
+                                                <div class="active">Active</div>
+                                            </td>
+                                            <td>5</td>
+                                            <td>
+                                                <button id="tableBtn">Review</button>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>1</td>
                                             <td id="name">Mohamed</td>
@@ -161,10 +210,9 @@
                     <h2>EMS&copy;</h2>
                 </div>
                 <ul class="Fnavbar">
-                    <li><a href="#">Support</a></li>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">terms</a></li>
+                    <li><a href="support.php">Support</a></li>
+                    <li><a href="privacy.php">Privacy</a></li>
+                    <li><a href="terms.php">terms</a></li>
                 </ul>
 
             </footer>

@@ -1,8 +1,5 @@
-@import url(Stemplet.css);
+@import url(Stemplate.css);
 
-.dashboard_link {
-  color: var(--secound);
-}
 #container {
   overflow: auto;
 }
@@ -12,44 +9,47 @@
 }
 #mainH1 {
   background-color: var(--fourth);
+  color: var(--secound);
 }
 #container {
   background-color: var(--fourth);
-  max-height: auto;
-  height: 100%;
-  color: var(--first);
-  width: 100%;
-}
-#right{
-  margin-bottom: 70px;
+  min-height: 36rem;
+  color: #27374d;
 }
 #leftP2 {
   font-weight: 600;
 }
 #tableWrapper {
   overflow: auto;
-  max-height: 25rem;
+  max-height: 20rem;
 }
-
 ::-webkit-scrollbar {
   width: 10px;
 }
+p{
+  color: var(--secound);
+}
 #tableDiv span {
-  background-color: #526d82;
+  background-color: var(--secound);
   color: white;
+  right: 5px;
+}
+#tableDiv{
+  background-color: white;
 }
 #tableDiv h1 {
-  color: #9db2bf;
+  color: var(--secound);
 }
 table tr {
   border-bottom: 1px;
   text-align: center;
-  border-color: rgb(187, 177, 177);
+  color: var(--secound);
+  border-color: var(--third);
   border-style: solid;
   height: 3rem;
 }
 #tableBtn {
-  background-color: #29cacc;
+  background-color: var(--secound);
   padding: 2px;
 }
 #tableBtn:active {
@@ -59,7 +59,7 @@ table tr {
 }
 
 #name {
-  color: rgb(79, 79, 238);
+  color: var(--secound);
 }
 #tableBtn {
   border-radius: 15px;
@@ -74,9 +74,18 @@ table tr {
   border-radius: 15px;
   padding: 2px;
   background-color: rgb(9, 149, 9);
+  color: white;
 }
 .inactive {
   border-radius: 15px;
   padding: 2px;
   background-color: red;
+}
+#tableWrapper {
+  position: relative;
+}
+#container #tableDiv {
+  position: sticky;
+
+  top: 0;
 }

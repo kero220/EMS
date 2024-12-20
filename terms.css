@@ -1,0 +1,47 @@
+:root{
+    --first: #27374D;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    background-color: var(--first);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  #container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px var(--first);
+    margin-bottom: 50px;
+  }
+
+
+  h1,
+  h2 {
+    color:var(--first);
+    font-size: x-large;
+    font-weight: bold;
+  }
+
+  ol {
+    line-height: 1.6;
+  }
+
+  footer {
+    background-color: var(--first);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Leave Request</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
     <link rel="stylesheet" href="leaveRequest.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet" />
@@ -16,7 +16,6 @@
             <div><img src="pngegg.png" alt=""></div>
         </button>
         <div class="list">
-
             <a href="dashboard.php" class="dashboard_link block"><i class="fa-solid fa-sliders"></i> Dashboard</a>
             <!----user managment---->
             <a href="#" class="mainLink block">User Managment</a>
@@ -48,9 +47,7 @@
 
         <div class="content w-full">
             <header class="z-10">
-
                 <a href="#"><i class="fa-solid fa-plus ml-8"></i> New Item</a>
-
                 <div class="navbar flex items-center gap-4">
                     <img src="user.png" alt="User Icon" class="w-10">
                     <label for="username">User_name</label>
@@ -59,7 +56,34 @@
 
             </header>
             <section>
+                <div id="container" class="m-auto mt-20 rounded-xl bg-gray-100 p-6 shadow-lg max-w-xl">
+                    <h1 class="text-center text-2xl p-4 m-4 font-semibold">
+                        Request For leave
+                    </h1>
+                    <div id="wrapper">
+                        <form class="flex flex-col gap-6 overflow-auto  ">
+                            <div id="contacts" class="flex justify-around my-4 ">
+                                <input type="email" id="email" placeholder="Email"
+                                    class="rounded-lg text-center font-bold p-2" required />
 
+                                <input type="text" id="phone" placeholder="Phone"
+                                    class="rounded-lg text-center font-bold p-1" required />
+                            </div>
+                            <div id="date" class="flex justify-around my-4">
+                                <input type="time" id="employeeID" placeholder="Time"
+                                    class="rounded-lg text-center font-bold p-2 w-1/3" required />
+                                <input type="date" id="date" placeholder=""
+                                    class="rounded-lg text-center font-bold p-2 w-2/6" required />
+                            </div>
+                            <textarea name="reason" id="reson" class="mx-10 mt-4 mb-8 p-2 text-center"
+                                placeholder="Enter Your Reason"></textarea>
+                            <button type="submit" id="submitBtn"
+                                class="w-4/6 m-auto p-2 text-white font-bold rounded-2xl">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </section>
             <footer>
                 <div class="copyright">
@@ -75,9 +99,7 @@
         </div>
 
     </div>
-    <script src="list.js">
-
-    </script>
+    <script src="list.js"></script>
 </body>
 
 </html>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Manage Designations</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-    <link rel="stylesheet" href="leaveRequest.css">
+    <link rel="stylesheet" href="manageDesignation.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet" />
 
 </head>
@@ -16,9 +16,8 @@
             <div><img src="pngegg.png" alt=""></div>
         </button>
         <div class="list">
-
             <a href="dashboard.php" class="dashboard_link block"><i class="fa-solid fa-sliders"></i> Dashboard</a>
-            <!----user managment---->
+            <!----50 managment---->
             <a href="#" class="mainLink block">User Managment</a>
             <div id="linksList">
                 <a href="manageUser.php"><i class="fa-solid fa-user"></i> Manage User</a>
@@ -48,9 +47,7 @@
 
         <div class="content w-full">
             <header class="z-10">
-
                 <a href="#"><i class="fa-solid fa-plus ml-8"></i> New Item</a>
-
                 <div class="navbar flex items-center gap-4">
                     <img src="user.png" alt="User Icon" class="w-10">
                     <label for="username">User_name</label>
@@ -60,6 +57,54 @@
             </header>
             <section>
 
+                <div id="container" class="my-4 m-auto p-4">
+                    <form id="manageDesignationForm" class="flex flex-col gap-4 h-full max-h-auto min-w-auto">
+                        <div id="myH1" class="text-2xl mb-6">Payroll</div>
+                        <div id="wrapper">
+                            <div id="tableWrapper">
+                                <table id="table" class="w-full m-auto">
+                                    <thead>
+                                        <tr>
+                                            <th>Empolyee Name</th>
+                                            <th>Position</th>
+                                            <th>Base Salary</th>
+                                            <th>Bonus</th>
+                                            <th>Salary Date</th>
+                                            <th>Salary Time</th>
+                                            <th>Taxes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="text" id="emp_name" required /></td>
+                                            <td><input type="text" id="emp_position" required /></td>
+                                            <td>
+                                                <input type="number" id="baseSalay" required />
+                                            </td>
+                                            <td>
+                                                <input type="number" id="bonus" required />
+                                            </td>
+                                            <td>
+                                                <input type="number" id="salaryDate" required />
+                                            </td>
+                                            <td>
+                                                <input type="number" id="salaryTime" required />
+                                            </td>
+                                            <td>
+                                                <input type="number" id="taxes" required />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="submit" id="submitBtn"
+                                class="px-4 py-2 text-white mb-4 rounded-md font-semibold">
+                                submit
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
             </section>
             <footer>
                 <div class="copyright">
@@ -75,9 +120,7 @@
         </div>
 
     </div>
-    <script src="list.js">
-
-    </script>
+    <script src="list.js"></script>
 </body>
 
 </html>
