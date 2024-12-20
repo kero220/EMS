@@ -1,6 +1,7 @@
 
 <?php
-require_once "conn.php";
+require_once __DIR__ . "/conn.php";
+
 
 function generate_tokens()
 {
@@ -244,5 +245,15 @@ function get_last_connection_of_user($emp_id, $pdo)
   $stmt->execute();
   $rs = $stmt->fetch();
   return $rs['selector'] . ":" . $rs['hashed_validator'];
+}
+function get_employees_num($pdo)
+{
+  $sql = "select count(*) from employees";
+
+  $stmt = $pdo->prepare($sql);
+
+  $stmt->execute();
+
+  return $stmt->fetch();
 }
 ?>

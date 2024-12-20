@@ -1,6 +1,6 @@
 <?php
-require_once "back_end/conn.php";
-require_once "back_end/token.php";
+require_once __DIR__ . "/conn.php";
+require_once __DIR__ . "/token.php";
 
 #_________following code must be in all pages__________
 
@@ -24,7 +24,7 @@ if (isset($_COOKIE['token'])) {
     setcookie("token", "", time() - 1, "/"); #expire cookie and token and delete from browser
 
 
-    header("location: signin.php");
+    header("location: ../back_end/signin.php");
     exit;
   }
   # echo "no cookie set";
@@ -43,8 +43,9 @@ if (isset($_COOKIE['token'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EMS</title>
-  <link rel="icon" href="webapp_img\employee-management-system-icon-hexa-color-_27374D-_1_ (1).ico" type="image/ico">
-  <link rel="stylesheet" href="signin.css">
+  <meta http-equiv="refresh" content="3600"><!--auto refresh the page-->
+  <link rel="icon" href="../webapp_img/employee-management-system-icon-hexa-color-_27374D-_1_ (1).ico" type="image/ico">
+  <link rel="stylesheet" href="../front_end/signin.css"> <!-- must use "../" because if not the path will be localhost/webproject/back_end/front_end/signin.css-->
 
 </head>
 
@@ -60,7 +61,7 @@ if (isset($_COOKIE['token'])) {
     <div class="signin"> <!--Sign in div-->
       <!----------------------------image-------------------------------->
       <div class="image">
-        <img src="webapp_img/user.png" alt="user photo">
+        <img src="../webapp_img/user.png" alt="user photo">
       </div>
       <!----------------------------username field-------------------------------->
       <div class="username_txt">
@@ -132,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-    if ($GLOBALS['stmt']->rowCount() == 1) {  #ensure that sql display the unique row
+    if ($GLOBALS['stmt']->rowCount() > 0) {  #ensure that sql display the unique row
 
       $rs = $GLOBALS['stmt']->fetch(); # go to next row
 
@@ -165,6 +166,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['HTTP_USER_AGENT'] = hash("sha256", $_SERVER["HTTP_USER_AGENT"]); #infos about client 
         $_SESSION['pat'] = $_SERVER["REMOTE_ADDR"] . ":" . $_SERVER['REMOTE_PORT'];
         $_SESSION['REMOTE_USER'] = $_SERVER['REMOTE_USER'];
+        $_SESSION['REMOTE_PASSWORD'] = $_SERVER['REMOTE_PASSWORD'];
+        $_SESSION['employee_num'] = get_employees_num($pdo);
+        $_SESSION['image'] = base64_encode($rs['image']);
+        $_SESSION['position'] = $rs['position'];
+        $_SESSION['fname'] = $rs['fname'];
+        $_SESSION['lname'] = $rs['lname'];
+        $_SESSION['manager_id'] = $rs['manager_id'];
+        $_SESSION['branch_location'] = $rs['branch_location'];
+        $_SESSION['dept_id'] = $rs['dept_id'];
 
 
 
@@ -174,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
       #session_regenerate_id();
       $pdo = null;
-      header('Location:templet.php');
+      header('Location: ../back_end/dashboard.php');
       exit;
     } else {
 

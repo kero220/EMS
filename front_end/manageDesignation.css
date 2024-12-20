@@ -1,0 +1,65 @@
+@import url(../front_end/Stemplate.css);
+
+#container {
+    background-color: var(--fourth);
+    max-width: 80%;
+    border-radius: 10px;
+    height: 42rem;
+    color: var(--secound);
+}
+
+#wrapper {
+    padding: 4px;
+    background-color: white;
+    height: 90%;
+    overflow: auto;
+}
+
+#tableWrapper {
+    height: 80%;
+    margin-top: 30px;
+}
+
+#table {
+    background-color: white;
+    color: var(--secound);
+}
+
+#table td {
+    text-align: center;
+
+}
+
+
+#table tr {
+    border-bottom: 2px;
+    border-style: solid;
+    border-color: var(--secound);
+}
+
+#table tr input {
+    border: 2px;
+    padding: 4px;
+    width: 120px;
+    margin: 4px;
+    text-align: center;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: var(--third);
+}
+#submitBtn{
+    background-color: var(--secound);
+}
+
+#submitBtn {
+    float: right;
+    margin-right: 50px;
+}
+
+#submitBtn:hover {
+    opacity: 85%;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
