@@ -1,0 +1,88 @@
+@import url(../front_end/Stemplate.css);
+#container {
+  background-color: var(--fourth);
+  max-width: 80%;
+  border-radius: 10px;
+  height: 42rem;
+  color: var(--secound);
+}
+#addBtn {
+  background-color: var(--secound);
+}
+#addBtn:hover {
+  background-color: var(--third);
+}
+#table tr {
+  border-bottom: 2px;
+
+  border-style: solid;
+  border-color: var(--fourth);
+}
+#columnSelection {
+  border-radius: 5px;
+  border-color: var(--secound);
+}
+#columnSelection:visited {
+  border-color: var(--secound);
+}
+#status {
+  background-color: var(--secound);
+
+  font-weight: bold;
+  border-radius: 6px;
+  margin-left: 8px;
+}
+#dateData {
+  background-color: var(--secound);
+
+  font-weight: bold;
+  border-radius: 6px;
+}
+#approveBtn {
+  border: 2px;
+  border-style: solid;
+  border-color: var(--fourth);
+  margin: 4px;
+  border-radius: 4px;
+}
+#approveBtn:hover {
+  opacity: 80%;
+}
+#declineBtn {
+  border: 2px;
+  border-style: solid;
+  border-color: var(--fourth);
+  border-radius: 4px;
+}
+#declineBtn:hover {
+  opacity: 80%;
+}
+#image {
+  width: 50px;
+  height: 50px;
+  /*background-color: var(--secound);*/
+  object-fit: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+#tableWrapper h1 {
+  color: var(--fourth);
+}
+
+#tableWrapper {
+  overflow: auto;
+  overflow-x: auto;
+  table-layout: fixed;
+  height: 85%;
+}
+td,
+th {
+  margin: 0 5px;
+  padding: 0 5px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+#sub:hover {
+}

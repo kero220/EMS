@@ -1,3 +1,4 @@
+<?php session_start();  ?>
 <html lang="en">
 
 <head>
@@ -5,57 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-    <link rel="stylesheet" href="leaveRequest.css">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="Stemplet.css">
 </head>
 
 <body>
     <div class="page">
-        <button class="text-red-500 absolute top-3 left-2 z-20  rounded-lg p-2" id="hideShowBtn" onclick="myFunction()">
-            <div><img src="pngegg.png" alt=""></div>
-        </button>
         <div class="list">
-
-            <a href="dashboard.php" class="dashboard_link block"><i class="fa-solid fa-sliders"></i> Dashboard</a>
+            <a href="#" class="mainlink"><i class="fa-solid fa-sliders"></i> Dashboard</a>
             <!----user managment---->
-            <a href="#" class="mainLink block">User Managment</a>
+            <a href="#" class="mainLink">User Managment</a>
             <div id="linksList">
-                <a href="manageUser.php"><i class="fa-solid fa-user"></i> Manage User</a>
-                <a href="addUser.php"><i class="fa-solid fa-gears"></i> Add User</a>
+                <a href="#" target="_blank"><i class="fa-solid fa-user"></i> Manage User</a>
+                <a href="#" target="_blank"><i class="fa-solid fa-gears"></i> User Settings</a>
             </div>
             <!----employee managment---->
-            <a href="#" class="mainLink block">Employee Managment</a>
+            <a href="#" class="mainLink">Employee Managment</a>
             <div id="linksList">
-                <a href="manageEmployee.php"><i class="fa-solid fa-users-viewfinder"></i> Manage Employees</a>
-                <a href="manageDepartments.php"><i class="fa-solid fa-users-gear"></i> Manage Departments</a>
-                <a href="manageDesignation.php"><i class="fa-solid fa-file"></i> Manage Designations</a>
+                <a href="#" target="_blank"><i class="fa-solid fa-users-viewfinder"></i> Manage Employees</a>
+                <a href="#" target="_blank"><i class="fa-solid fa-users-gear"></i> Manage Departments</a>
+                <a href="#" target="_blank"><i class="fa-solid fa-file"></i> Manage Designations</a>
             </div>
             <!----attendance---->
-            <a href="#" class="mainLink block">Attendance</a>
+            <a href="#" class="mainLink">Attendance</a>
             <div id="linksList">
-                <a href="Schedule.php"><i class="fa-solid fa-clock"></i> Schedule</a>
-                <a href="dailyAttendance.php"><i class="fa-solid fa-calendar-days"></i> Daily Attendance</a>
-                <a href="attendanceSheet.php"><i class="fa-solid fa-book"></i> Sheet Report</a>
+                <a href="$" target="_blank"><i class="fa-solid fa-clock"></i> Schedule</a>
+                <a href="#" target="_blank"><i class="fa-solid fa-calendar-days"></i> Daily Attendance</a>
+                <a href="#" target="_blank"><i class="fa-solid fa-book"></i> Sheet Report</a>
             </div>
             <!----leave managment---->
-            <a href="#" class="mainLink block">Leave Managment</a>
+            <a href="#" class="mainLink">Leave Managment</a>
             <div id="linksList">
-                <a href="manageLeave.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Manage Leaves</a>
-                <a href="leaveRequest.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Leave Request</a>
+                <a href="#" target="_blank"><i class="fa-solid fa-arrow-right-from-bracket"></i> Manage Leaves</a>
             </div>
         </div>
 
-        <div class="content w-full">
-            <header class="z-10">
+        <div class="content">
+            <header>
+                <a href="#"><i class="fa-solid fa-plus"></i> New Item</a>
+                <ul class="navbar">
+                    <li><img src="user.png" alt="">
+                        <label for="uesrname"></label>
+                    </li>
+                    <li><a href="#">Sign Out</a></li>
 
-                <a href="#"><i class="fa-solid fa-plus ml-8"></i> New Item</a>
-
-                <div class="navbar flex items-center gap-4">
-                    <img src="user.png" alt="User Icon" class="w-10">
-                    <label for="username">User_name</label>
-                    <a href="#" class="text-red-500 font-bold">Sign Out</a>
-                </div>
+                </ul>
 
             </header>
             <section>
@@ -66,17 +60,32 @@
                     <h2>EMS&copy;</h2>
                 </div>
                 <ul class="Fnavbar">
-                    <li><a href="support.php">Support</a></li>
-                    <li><a href="privacy.php">Privacy</a></li>
-                    <li><a href="terms.php">terms</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">terms</a></li>
                 </ul>
 
             </footer>
         </div>
 
     </div>
-    <script src="list.js">
-
+    <script>
+        // احصل على جميع الروابط الرئيسية
+        document.querySelectorAll('a.mainLink').forEach(function(mainLink) {
+            mainLink.addEventListener('click', function(event) {
+                event.preventDefault(); // منع الانتقال إلى صفحة أخرى
+                const linksList = mainLink.nextElementSibling; // الحصول على القائمة التابعة
+                if (linksList && linksList.id === 'linksList') {
+                    // التحقق من حالة الإظهار والإخفاء
+                    if (linksList.style.display === 'none' || !linksList.style.display) {
+                        linksList.style.display = 'block';
+                    } else {
+                        linksList.style.display = 'none';
+                    }
+                }
+            });
+        });
     </script>
 </body>
 
