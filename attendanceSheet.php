@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Attendace</title>
+    <title>Attendance Sheet</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
     <link rel="stylesheet" href="dailyAttendance.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet" />
@@ -16,7 +16,7 @@
             <div><img src="pngegg.png" alt=""></div>
         </button>
         <div class="list">
-            <a href="dashboard.php" class="dashboard_link block"><i class="fa-solid fa-sliders "></i> Dashboard</a>
+            <a href="dashboard.php" class="dashboard_link block"><i class="fa-solid fa-sliders"></i> Dashboard</a>
             <!----user managment---->
             <a href="#" class="mainLink block">User Managment</a>
             <div id="linksList">
@@ -31,7 +31,7 @@
                 <a href="manageDesignation.php"><i class="fa-solid fa-file"></i> Manage Designations</a>
             </div>
             <!----attendance---->
-            <a href="#" class="mainLink block">Attendance</a>
+            <a href="#" class="mainLink blokc">Attendance</a>
             <div id="linksList">
                 <a href="Schedule.php"><i class="fa-solid fa-clock"></i> Schedule</a>
                 <a href="dailyAttendance.php"><i class="fa-solid fa-calendar-days"></i> Daily Attendance</a>
@@ -40,7 +40,7 @@
             <!----leave managment---->
             <a href="#" class="mainLink block">Leave Managment</a>
             <div id="linksList">
-                <a href="managLeave.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Manage Leaves</a>
+                <a href="manageLeave.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Manage Leaves</a>
                 <a href="leaveRequest.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Leave Request</a>
             </div>
         </div>
@@ -58,7 +58,7 @@
             <section>
                 <div id="container" class="m-auto my-4 p-2">
                     <div id="header" class="text-left flex justify-between mb-4 mt-2 mx-2">
-                        <h1 id="myH1" class="text-2xl">Attendace Schedule</h1>
+                        <h1 id="myH1" class="text-2xl">Attendace Sheet</h1>
                         <button id="btnAdd" class=" rounded-lg text-white font-bold">
                             Add
                         </button>
