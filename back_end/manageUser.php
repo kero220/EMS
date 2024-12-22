@@ -303,7 +303,7 @@ if (isset($_COOKIE['token'])) {
       </div>
 
    </div>
-   <script src="front_end/list.js"></script>
+   <script src="../front_end/list.js"></script>
 </body>
 
 </html>
