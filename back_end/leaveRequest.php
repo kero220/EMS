@@ -61,22 +61,26 @@
                   Request For leave
                </h1>
                <div id="wrapper">
-                  <form class="flex flex-col gap-6 overflow-auto  ">
+                  <form class="flex flex-col gap-6 overflow-auto" method="POST" action="../database_for_php/insertToLeaves.php">
                      <div id="contacts" class="flex justify-around my-4 ">
                         <input type="email" id="email" placeholder="Email" class="rounded-lg text-center font-bold p-2"
-                           required />
+                           name="email" required />
 
                         <input type="text" id="phone" placeholder="Phone" class="rounded-lg text-center font-bold p-1"
-                           required />
+                           name="phone" required />
                      </div>
                      <div id="date" class="flex justify-around my-4">
                         <input type="time" id="employeeID" placeholder="Time"
-                           class="rounded-lg text-center font-bold p-2 w-1/3" required />
-                        <input type="date" id="date" placeholder="" class="rounded-lg text-center font-bold p-2 w-2/6"
-                           required />
+                           class="rounded-lg text-center font-bold p-2 w-1/3" name="time" required />
+
+                        <input type="date" id="date" class="rounded-lg text-center font-bold p-2 w-2/6"
+                           value="<?php date_default_timezone_set("Africa/Cairo"); $d = date_create(); echo date_format($d, "Y-m-d") ?>"
+                           name="date" required />
                      </div>
                      <textarea name="reason" id="reson" class="mx-10 mt-4 mb-8 p-2 text-center"
-                        placeholder="Enter Your Reason"></textarea>
+                        placeholder="Enter Your Reason" required></textarea>
+                     <textarea name="summary" id="reson" class="mx-10 mt-4 mb-8 p-2 text-center"
+                        placeholder="Enter summary" required></textarea>
                      <button type="submit" id="submitBtn" class="w-4/6 m-auto p-2 text-white font-bold rounded-2xl">
                         Submit
                      </button>

@@ -1,3 +1,7 @@
+<?php
+require_once "conn.php"
+?>
+
 <html lang="en">
 
 <head>
@@ -57,7 +61,9 @@
          </header>
          <section>
             <div id="container" class="p-4 text-left m-auto">
-               <form id="manageEmployeesForm" class="flex flex-col gap-4 h-full max-h-auto min-w-auto">
+               <form id="manageEmployeesForm" class="flex flex-col gap-4 h-full max-h-auto min-w-auto" method="POST"
+                  action="../database_for_php/accAndRejReq.php">
+
                   <div class="flex justify-between mb-4">
                      <h1 id="myH1" class="text-2xl">Leave Management</h1>
                   </div>
@@ -81,7 +87,7 @@
                         <thead class="m-2">
                            <tr class="text-center">
                               <th class="min-w-12">Id</th>
-                              <th class="max-w-[10rem]">Name</th>
+                              <th class="max-w-[10rem]">Username</th>
                               <th>Email</th>
                               <th>Department</th>
                               <th>Date</th>
@@ -92,23 +98,45 @@
                            </tr>
                         </thead>
                         <tbody class="text-center">
-                           <tr>
-                              <td>1</td>
-                              <td>Kerolos Soliman</td>
-                              <td>****@gmail.com</td>
-                              <td>Benha Branch</td>
-                              <td>
-                                 <div id="dateData">1/2/2024</div>
-                              </td>
-                              <td>06:05 PM</td>
-                              <td>IT</td>
-                              <td>Sickness</td>
-                              <td id="actionBtn">
-                                 <button id="approveBtn" onclick="acc()">✔</button>
 
-                                 <button id="declineBtn" onclick="rej()">❌</button>
+                           <?php
+                           // ##### GET DATA OF LEAVES #####
+                           $query = "SELECT e.emp_id, e.username, e.position, c.e_mail, d.dept_name,
+                                    l.leave_type, l.leave_time, l.leave_date
+                           FROM departments d JOIN employees e
+                           ON(d.dept_id = e.dept_id)
+                           JOIN leaves l
+                           ON(l.emp_id = e.emp_id)
+                           JOIN contact c
+                           ON(c.emp_id = e.emp_id)
+                           WHERE l.leave_status = 'Pending'";
+
+                           $stmt = $pdo->prepare($query);
+                           $stmt->execute();
+                           $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                           $result = $stmt->fetchAll();
+
+                           foreach ($result as $row):?>
+
+                           <tr>
+                              <td><?php echo $row['emp_id']; ?></td>
+                              <td><?php echo $row['username']; ?></td>
+                              <td><?php echo $row['e_mail']; ?></td>
+                              <td><?php echo $row['dept_name']; ?></td>
+                              <td>
+                                 <div id="dateData"><?php echo $row['leave_date']; ?></div>
+                              </td>
+                              <td><?php echo $row['leave_time']; ?></td>
+                              <td><?php echo $row['position']; ?></td>
+                              <td><?php echo $row['leave_type']; ?></td>
+                              <td id="actionBtn">
+                                 <button id="approveBtn" name="accept" class='action'
+                                    value=<?php echo $row['leave_time'];?>>✔</button>
+                                 <button id="declineBtn" name="reject" class='action'
+                                    value=<?php echo $row['leave_time'];?>>❌</button>
                               </td>
                            </tr>
+                           <?php endforeach;?>
                         </tbody>
                      </table>
                   </div>
@@ -134,6 +162,7 @@
 
    </div>
    <script src="../front_end/list.js"></script>
+   <script src="../front_end/eraseRows.js"></script>
 </body>
 
 </html>

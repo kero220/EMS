@@ -82,7 +82,6 @@ if (isset($_COOKIE['token'])) {
             <!-- <a href="#"><i class="fa-solid fa-plus"></i> New Item</a>-->
             <div class="navbar flex items-center gap-4">
 
-               <?php require_once 'uploadPhoto.php'; echo $_SESSION['image']?>
                <label for="username"><?php echo isset($_SESSION['username'])? $_SESSION['username'] : ''; ?></label>
                <a href="signout.php" class="text-red-500 font-bold">Sign Out</a>
             </div>
