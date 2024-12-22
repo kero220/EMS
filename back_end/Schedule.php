@@ -20,19 +20,20 @@ require_once 'conn.php';
          <div><img src="pngegg.png" alt=""></div>
       </button>
       <div class="list">
-         <a href="dashboard.php" class="dashboard_link block"><i class="fa-solid fa-sliders"></i> Dashboard</a>
+         <a href="../back_end/dashboard.php" class="dashboard_link block"><i class="fa-solid fa-sliders"></i>
+            Dashboard</a>
          <!----user managment---->
          <a href="#" class="mainLink block">User Managment</a>
          <div id="linksList">
-            <a href="manageUser.php"><i class="fa-solid fa-user"></i> Manage User</a>
-            <a href="addUser.php"><i class="fa-solid fa-gears"></i> Add User</a>
+            <a href="../back_end/manageUser.php"><i class="fa-solid fa-user"></i> Manage User</a>
+            <a href="../back_end/addUser.php"><i class="fa-solid fa-gears"></i> Add User</a>
          </div>
          <!----employee managment---->
          <a href="#" class="mainLink block">Employee Managment</a>
          <div id="linksList">
-            <a href="manageEmployee.php"><i class="fa-solid fa-users-viewfinder"></i> Manage Employees</a>
-            <a href="manageDepartments.php"><i class="fa-solid fa-users-gear"></i> Manage Departments</a>
-            <a href="managedesignathon.php"><i class="fa-solid fa-file"></i> Manage Designations</a>
+            <a href="../back_end/manageEmployee.php"><i class="fa-solid fa-users-viewfinder"></i> Manage Employees</a>
+            <a href="../back_end/manageDepartments.php"><i class="fa-solid fa-users-gear"></i> Manage Departments</a>
+            <a href="../back_end/manageDesignation.php"><i class="fa-solid fa-file"></i> Manage Designations</a>
          </div>
          <!----attendance---->
          <a href="#" class="mainLink block">Attendance</a>
