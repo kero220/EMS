@@ -46,10 +46,6 @@ function search($name, $limit, $pdo)
 function button_delete($emp_id, $pdo)
 {
 
-
-
-
-
   $sql = "DELETE FROM employees WHERE emp_id = :e";
   $stmt = $pdo->prepare($sql);
   $stmt->bindParam(':e', $emp_id, PDO::PARAM_STR);

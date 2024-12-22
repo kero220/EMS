@@ -7,7 +7,7 @@ require_once   "../back_end/conn.php";
 function insert_new_employee($upload = null, $fname, $lname, $date, $user, $pass, $man_id = null, $dept_id, $position, $branch_location, $email, $flag, $phone, $pdo)
 {
   $sql1 = "insert into employees (image, fname, lname, hire_date, username, password, manager_id, dept_id, position,branch_location,active_flag)
-   values(:i,:f,:l,:h,:u,:pass,:m,:d,:p,:b,:a)";
+  values(:i,:f,:l,:h,:u,:pass,:m,:d,:p,:b,:a)";
 
   $stmt1 = $pdo->prepare($sql1);
   $stmt1->bindParem(':i', $upload, PDO::PARAM_STR);

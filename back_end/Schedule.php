@@ -81,7 +81,8 @@ require_once 'conn.php';
                      </p>
 
                      <span class="font-bold">Search
-                        <input type="text" class="border-2 border-slid border-[#9DB2BF] p-[2px]" /></span>
+                        <input type="text" class="border-2 border-slid border-[#9DB2BF] p-[2px]" name="search" />
+                     </span>
                   </div>
                   <table id="table" class="w-full min-h-[5rem]">
                      <thead class="m-2">
@@ -98,33 +99,27 @@ require_once 'conn.php';
                      <tbody class="text-center">
 
                         <?php
-                        // DISPLAY EMPLOYEES ATTENDANCE
-                        $query = "SELECT * FROM attendance";
+                        // ##### DISPLAY EMPLOYEES ATTENDANCE #####
+                        $query = "SELECT a.attendance_time, a.attendance_id, a.attendance_date, a.emp_id, a.time_out, e.username
+                        FROM attendance a JOIN employees e
+                        ON(a.emp_id = e.emp_id)";
+
                         $stmt = $pdo->prepare($query);
                         $stmt->execute();
                         $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                        
-                        foreach ($stmt->fetchAll() as $row):?>
+                        $result = $stmt->fetchAll();
+
+                        foreach ($result as $row):?>
 
                         <tr>
-                           <!-- <td>1</td>
-                           <td>Kero Soliman</td>
-                           <td>12/12/2024</td>
-                           <td>
-                              <div id="time">08:00:00</div>
-                           </td>
-                           <td>
-                              <div id="time">17:00:18</div>
-                           </td> -->
-
                            <td><?php echo $row['emp_id']?></td>
-                           <td>Kero Soliman</td>
+                           <td><?php echo $row['username']?></td>
                            <td><?php echo $row['attendance_date']?></td>
                            <td>
                               <div id="time"><?php echo $row['attendance_time']?></div>
                            </td>
                            <td>
-                              <div id="time">17:00:18</div>
+                              <div id="time"><?php echo $row['time_out']?></div>
                            </td>
 
 
@@ -165,3 +160,9 @@ require_once 'conn.php';
 </body>
 
 </html>
+
+<?php
+
+
+
+?>
