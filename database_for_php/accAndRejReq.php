@@ -25,7 +25,7 @@ if(isset($_POST['accept'])){
       // $stmt->bindParam(":id", $id);
       $stmt->execute();
    } catch (PDOException $e){
-      echo "Error accepting request: " . $e->getMessage();
+      die( "Error accepting request: " . $e->getMessage());
    }
 }
 

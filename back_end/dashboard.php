@@ -1,3 +1,7 @@
+<?php
+require_once '../back_end/conn.php';
+?>
+
 <html lang="en">
 
 <head>
@@ -68,20 +72,44 @@
                         <span id="leftLogo" class="absolute top-2 right-2 bg-blue-400 opacity-30 rounded-2xl w-8 h-8">
                            <img src="https://cdn-icons-png.flaticon.com/128/1828/1828640.png" alt="" />
                         </span>
-                        <p id="leftP2" class="mt-10 text-2xl text-left">2</p>
+                        <p id="leftP2" class="mt-10 text-2xl text-left">
+                           <?php
+
+                        // *****SELECT REVIEWS NUMBER*****
+                           require_once '../database_for_php/dashboardInfo.php';
+                           $review = numReviews($pdo);
+                           echo count($review);
+                           ?>
+                        </p>
                      </div>
                      <div id="second" class="bg-white rounded-md relative p-2">
-                        <p id="leftP" class="text-sm text-left font-semibold">Emails</p>
+                        <p id="leftP" class="text-sm text-left font-semibold">Employees</p>
                         <span id="leftLogo"
                            class="absolute top-2 right-2 bg-blue-400 opacity-30 rounded-2xl w-8 h-8"><img
                               src="https://cdn-icons-png.flaticon.com/128/14026/14026792.png" alt="" /></span>
-                        <p id="leftP2" class="mt-10 text-2xl text-left">2</p>
+                        <p id="leftP2" class="mt-10 text-2xl text-left">
+
+                           <?php
+                           // *****SELECT EMPLOYEES NUMBER*****
+                           require_once '../database_for_php/dashboardInfo.php';
+                           $employees = numEmployees($pdo);
+                           echo count($employees);
+                           ?>
+                        </p>
                      </div>
                      <div id="third" class="bg-white rounded-md relative p-2">
-                        <p id="leftP" class="text-sm text-left font-semibold">Contacts</p>
+                        <p id="leftP" class="text-sm text-left font-semibold">Active</p>
                         <span id="leftLogo" class="absolute top-2 right-2 bg-blue-400 opacity-30 rounded-2xl w-8 h-8">
                            <img src="https://cdn-icons-png.flaticon.com/128/14025/14025691.png" alt="" /></span>
-                        <p id="leftP2" class="mt-10 text-2xl text-left">2</p>
+                        <p id="leftP2" class="mt-10 text-2xl text-left">
+
+                           <?php
+                           // *****SELECT ACTIVES NUMBER*****
+                           require_once '../database_for_php/dashboardInfo.php';
+                           $active = numActives($pdo);
+                           echo count($active);
+                           ?>
+                        </p>
                      </div>
                      <div id="forth" class="bg-white rounded-md relative p-2">
                         <p id="leftP" class="text-sm text-left font-semibold">
@@ -90,7 +118,15 @@
                         <span id="leftLogo"
                            class="absolute top-2 right-2 bg-blue-400 opacity-30 rounded-2xl w-8 h-8"><img
                               src="https://cdn-icons-png.flaticon.com/128/14025/14025827.png" alt="" /></span>
-                        <p id="leftP2" class="mt-10 text-2xl text-left">2</p>
+                        <p id="leftP2" class="mt-10 text-2xl text-left">
+
+                           <?php
+                        // *****SELECT PENDING REQUESTS NUMBER*****
+                           require_once '../database_for_php/dashboardInfo.php';
+                           $requst = numRequests($pdo);
+                           echo count($requst);
+                           ?>
+                        </p>
                      </div>
                   </div>
                   <div id="right" class="col-span-2 text-[#27374d]">
@@ -178,7 +214,7 @@
                         <table id="bottomTable" class="w-full rounded-md bg-white h-44">
                            <thead>
                               <tr class="border-b-[1px] border-gray-300 border-solid h-12">
-                                 <th>el</th>
+                                 <th>Id</th>
                                  <th>Name</th>
                                  <th>Department ID</th>
                                  <th>Manager ID</th>
@@ -188,15 +224,25 @@
                               </tr>
                            </thead>
                            <tbody>
+                              <?php
+                              // *****SELECT INFO ABOUT EMPLOYEES*****
+                              require_once '../database_for_php/dashboardInfo.php';
+                              $result = getInfo($pdo);
+
+                              foreach ($result as $row):?>
+
                               <tr>
-                                 <td>1</td>
-                                 <td id="name">Mohamed</td>
-                                 <td>5</td>
-                                 <td>2</td>
-                                 <td>IT</td>
-                                 <td>hard working</td>
-                                 <td>2000$</td>
+                                 <td><?php echo $row['emp_id'];?></td>
+                                 <td id="name"><?php echo $row['name'];?></td>
+                                 <td><?php echo $row['dept_id'];?></td>
+                                 <td><?php echo is_null($row['manager_id']) ? 'empty' : $row['manager_id'];?></td>
+                                 <td><?php echo $row['dept_name'];?></td>
+                                 <td><?php echo $row['feedback'];?></td>
+                                 <td><?php echo $row['base_salary'];?></td>
                               </tr>
+
+                              <?php endforeach;?>
+
                            </tbody>
                         </table>
                      </div>
