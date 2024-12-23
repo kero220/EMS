@@ -73,35 +73,36 @@
                                  <th>Bonus</th>
                                  <th>Salary Date</th>
                                  <th>Salary Time</th>
-                                 <th>Taxes</th>
+                                 <th>Deduction</th>
+                                 <th>Monthly Salary</th>
                               </tr>
                            </thead>
                            <tbody>
                               <tr>
-                                 <td><input type="text" id="emp_name" required /></td>
-                                 <td><input type="text" id="emp_position" required /></td>
-                                 <td>
-                                    <input type="number" id="baseSalay" required />
-                                 </td>
-                                 <td>
-                                    <input type="number" id="bonus" required />
-                                 </td>
-                                 <td>
-                                    <input type="number" id="salaryDate" required />
-                                 </td>
-                                 <td>
-                                    <input type="number" id="salaryTime" required />
-                                 </td>
-                                 <td>
-                                    <input type="number" id="taxes" required />
-                                 </td>
+                                 <?php
+                                 require_once "../database_for_php/getSalary.php";
+
+                                 $result = getSalary($pdo);
+                                 foreach ($result as $row):?>
+
+                              <tr>
+                                 <td><?php echo $row['name']; ?></td>
+                                 <td><?php echo $row['position']; ?></td>
+                                 <td><?php echo $row['base_salary'];?></td>
+                                 <td><?php echo $row['bonus']; ?></td>
+                                 <td><?php echo $row['salary_date']; ?></td>
+                                 <td><?php echo $row['salary_time']; ?></td>
+                                 <td><?php echo $row['deduction']; ?></td>
+                                 <td><?php echo $row['base_salary'] - $row['deduction'] + $row['bonus']; ?></td>
+                              </tr>
+                              <?php endforeach ?>;
                               </tr>
                            </tbody>
                         </table>
                      </div>
-                     <button type="submit" id="submitBtn" class="px-4 py-2 text-white mb-4 rounded-md font-semibold">
+                     <!-- <button type="submit" id="submitBtn" class="px-4 py-2 text-white mb-4 rounded-md font-semibold">
                         submit
-                     </button>
+                     </button> -->
 
                   </div>
                </form>
