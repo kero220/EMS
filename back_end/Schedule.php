@@ -93,8 +93,6 @@ require_once 'conn.php';
                            <th class="max-w-[10rem]">Date</th>
                            <th>Time In</th>
                            <th>Time Out</th>
-
-                           <th>Action</th>
                         </tr>
                      </thead>
                      <tbody class="text-center">
@@ -121,14 +119,6 @@ require_once 'conn.php';
                            </td>
                            <td>
                               <div id="time"><?php echo $row['time_out']?></div>
-                           </td>
-
-
-                           <td id="actionBtn">
-                              <button id="approveBtn"><a href="editSchedule.php" class="m-0"
-                                    alt="edit schedule">🖋️</a></button>
-
-                              <button id="declineBtn" alt="delete employee">❌</button>
                            </td>
                         </tr>
                         <?php endforeach;?>
