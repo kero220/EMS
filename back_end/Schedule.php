@@ -17,7 +17,7 @@ require_once 'conn.php';
 <body>
    <div class="page">
       <button class="text-red-500 absolute top-3 left-2 z-20  rounded-lg p-2" id="hideShowBtn" onclick="myFunction()">
-         <div><img src="pngegg.png" alt=""></div>
+         <div><img src="../webapp_img/pngegg.png" alt=""></div>
       </button>
       <div class="list">
          <a href="../back_end/dashboard.php" class="dashboard_link block"><i class="fa-solid fa-sliders"></i>
