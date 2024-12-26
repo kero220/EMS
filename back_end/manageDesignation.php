@@ -1,3 +1,41 @@
+<?php
+require_once  "../back_end/conn.php";
+require_once  "../database_for_php/manageUser_dp.php";
+date_default_timezone_set("Africa/Cairo"); # set time() to egypt timestamp
+session_start(); #to get session permission
+# check security
+
+if (isset($_COOKIE['token'])) {
+   if (is_token_expired($_COOKIE['token'], $pdo)) { # if cookie exist .. will check the expiration
+      $_SESSION['active'] = "not_active";
+
+      update_emp_status($_SESSION['emp_id'], $_SESSION['active'], $pdo);
+      #echo $_SESSION['emp_id'] . "hh";
+      delete_token($_SESSION['emp_id'], $pdo);
+
+      session_unset(); #remove all session variables
+      session_destroy();
+      # delete all user tokens
+
+
+      setcookie("token", "", time() - 1, "/"); #expire cookie and token and delete from browser
+
+
+      header("location: ../back_end/signin.php");
+      exit;
+   }
+
+   # echo "no cookie set";
+}
+
+
+
+
+
+
+
+?>
+
 <html lang="en">
 
 <head>
@@ -7,7 +45,8 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
    <link rel="stylesheet" href="../front_end/manageDesignation.css">
    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet" />
-
+   <meta http-equiv="refresh" content="3600"><!--auto refresh the page-->
+   <link rel="icon" href="../webapp_img/employee-management-system-icon-hexa-color-_27374D-_1_ (1).ico" type="image/ico">
 </head>
 
 <body>
@@ -49,11 +88,11 @@
 
       <div class="content w-full">
          <header class="z-10">
-            <a href="#"><i class="fa-solid fa-plus ml-8"></i> New Item</a>
+            <!--<a href="#"><i class="fa-solid fa-plus ml-8"></i> New Item</a>-->
             <div class="navbar flex items-center gap-4">
-               <img src="user.png" alt="User Icon" class="w-10">
-               <label for="username">User_name</label>
-               <a href="#" class="text-red-500 font-bold">Sign Out</a>
+               <?php echo "<img id='user_img' src='data:image/jpeg;base64," .   $_SESSION['image']  .  "'alt='User Image' class='w-10'>" ?>
+               <label for="username"><?php echo $_SESSION['username']; ?></label>
+               <a href="../back_end/signin.php" class="text-red-500 font-bold">Sign Out</a>
             </div>
 
          </header>
@@ -83,12 +122,12 @@
                                  require_once "../database_for_php/getSalary.php";
 
                                  $result = getSalary($pdo);
-                                 foreach ($result as $row):?>
+                                 foreach ($result as $row): ?>
 
                               <tr>
                                  <td><?php echo $row['name']; ?></td>
                                  <td><?php echo $row['position']; ?></td>
-                                 <td><?php echo $row['base_salary'];?></td>
+                                 <td><?php echo $row['base_salary']; ?></td>
                                  <td><?php echo $row['bonus']; ?></td>
                                  <td><?php echo $row['salary_date']; ?></td>
                                  <td><?php echo $row['salary_time']; ?></td>

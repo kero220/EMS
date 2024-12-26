@@ -12,6 +12,7 @@
 #addBtn:hover {
   background-color: var(--third);
 }
+
 #table tr {
   border-bottom: 2px;
 
@@ -85,4 +86,5 @@ th {
   width: 10px;
 }
 #sub:hover {
+  color: var(--third);
 }

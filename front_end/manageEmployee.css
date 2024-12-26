@@ -63,3 +63,8 @@ th {
 ::-webkit-scrollbar {
   width: 10px;
 }
+#sub:hover {
+  color: var(--third);
+}
+.radio {
+}

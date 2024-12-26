@@ -1,5 +1,39 @@
 <?php
-require_once '../back_end/conn.php';
+require_once  "../back_end/conn.php";
+require_once  "../database_for_php/dashboardInfo.php";
+date_default_timezone_set("Africa/Cairo"); # set time() to egypt timestamp
+session_start(); #to get session permission
+# check security
+
+if (isset($_COOKIE['token'])) {
+   if (is_token_expired($_COOKIE['token'], $pdo)) { # if cookie exist .. will check the expiration
+      $_SESSION['active'] = "not_active";
+
+      update_emp_status($_SESSION['emp_id'], $_SESSION['active'], $pdo);
+      #echo $_SESSION['emp_id'] . "hh";
+      delete_token($_SESSION['emp_id'], $pdo);
+
+      session_unset(); #remove all session variables
+      session_destroy();
+      # delete all user tokens
+
+
+      setcookie("token", "", time() - 1, "/"); #expire cookie and token and delete from browser
+
+
+      header("location: ../back_end/signin.php");
+      exit;
+   }
+
+   # echo "no cookie set";
+}
+
+
+
+
+
+
+
 ?>
 
 <html lang="en">
@@ -11,6 +45,8 @@ require_once '../back_end/conn.php';
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
    <link rel="stylesheet" href="../front_end/dashboard.css">
    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet" />
+   <meta http-equiv="refresh" content="3600">
+   <link rel="icon" href="../webapp_img/employee-management-system-icon-hexa-color-_27374D-_1_ (1).ico" type="image/ico">
 </head>
 
 <body>
@@ -53,19 +89,20 @@ require_once '../back_end/conn.php';
       <div class="content w-full ">
          <header class="z-10">
 
-            <a href="#"><i class="fa-solid fa-plus ml-8"></i> New Item</a>
+            <!--<a href="#"><i class="fa-solid fa-plus ml-8"></i> New Item</a>-->
             <div class="navbar flex items-center gap-4">
-               <?php require_once 'uploadPhoto.php'; ?>
-               <label for="username">User_name</label>
-               <a href="signout.php" class="text-red-500 font-bold">Sign Out</a>
+               <?php echo "<img id='user_img' src='data:image/jpeg;base64," .   $_SESSION['image']  .  "'alt='User Image' class='w-10'>" ?>
+               <label for="username"><?php echo $_SESSION['username']; ?></label>
+               <a href="../back_end/signin.php" class="text-red-500 font-bold">Sign Out</a>
             </div>
          </header>
          <section>
             <div id="about" class="m-auto">
                <h1 id="mainH1" class="text-left text-2xl px-4 pt-2">
-                  <span class="font-bold">Analytics</span> Dahsboard
+                  <span class="font-bold">Analytics</span> Dashboard
                </h1>
                <div id="container" class="grid grid-rows-2 grid-cols-4 p-4 gap-6">
+
                   <div id="left" class="col-span-2 grid grid-rows-2 grid-cols-2 gap-4">
                      <div id="first" class="bg-white rounded-md relative p-2">
                         <p id="leftP" class="text-sm text-left font-semibold">Reviews</p>
@@ -75,7 +112,7 @@ require_once '../back_end/conn.php';
                         <p id="leftP2" class="mt-10 text-2xl text-left">
                            <?php
 
-                        // *****SELECT REVIEWS NUMBER*****
+                           // *****SELECT REVIEWS NUMBER*****
                            require_once '../database_for_php/dashboardInfo.php';
                            $review = numReviews($pdo);
                            echo count($review);
@@ -83,22 +120,22 @@ require_once '../back_end/conn.php';
                         </p>
                      </div>
                      <div id="second" class="bg-white rounded-md relative p-2">
-                        <p id="leftP" class="text-sm text-left font-semibold">Employees</p>
+                        <p id="leftP" class="text-sm text-left font-semibold">Attendance</p>
                         <span id="leftLogo"
                            class="absolute top-2 right-2 bg-blue-400 opacity-30 rounded-2xl w-8 h-8"><img
                               src="https://cdn-icons-png.flaticon.com/128/14026/14026792.png" alt="" /></span>
                         <p id="leftP2" class="mt-10 text-2xl text-left">
 
                            <?php
-                           // *****SELECT EMPLOYEES NUMBER*****
+                           // *****SELECT attendance NUMBER*****
                            require_once '../database_for_php/dashboardInfo.php';
-                           $employees = numEmployees($pdo);
-                           echo count($employees);
+                           $employees = numatt($pdo);
+                           echo $employees['count(attendance_id)'];
                            ?>
                         </p>
                      </div>
                      <div id="third" class="bg-white rounded-md relative p-2">
-                        <p id="leftP" class="text-sm text-left font-semibold">Active</p>
+                        <p id="leftP" class="text-sm text-left font-semibold">Active Employees</p>
                         <span id="leftLogo" class="absolute top-2 right-2 bg-blue-400 opacity-30 rounded-2xl w-8 h-8">
                            <img src="https://cdn-icons-png.flaticon.com/128/14025/14025691.png" alt="" /></span>
                         <p id="leftP2" class="mt-10 text-2xl text-left">
@@ -121,7 +158,7 @@ require_once '../back_end/conn.php';
                         <p id="leftP2" class="mt-10 text-2xl text-left">
 
                            <?php
-                        // *****SELECT PENDING REQUESTS NUMBER*****
+                           // *****SELECT PENDING REQUESTS NUMBER*****
                            require_once '../database_for_php/dashboardInfo.php';
                            $requst = numRequests($pdo);
                            echo count($requst);
@@ -138,69 +175,38 @@ require_once '../back_end/conn.php';
                         <table id="rightTable" class="w-full rounded-md bg-white h-full">
                            <thead>
                               <tr class="border-gray-300 border-solid h-12">
-                                 <th>el</th>
+                                 <th>ID</th>
                                  <th>Name</th>
-                                 <th>Status</th>
                                  <th>Department ID</th>
+                                 <th>Status</th>
                                  <th>Review</th>
                               </tr>
                            </thead>
                            <tbody>
-                              <tr>
-                                 <td>1</td>
-                                 <td id="name">Mohamed</td>
-                                 <td>
-                                    <div class="active">Active</div>
-                                 </td>
-                                 <td>5</td>
-                                 <td>
-                                    <button id="tableBtn">Review</button>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>1</td>
-                                 <td id="name">Mohamed</td>
-                                 <td>
-                                    <div class="active">Active</div>
-                                 </td>
-                                 <td>5</td>
-                                 <td>
-                                    <button id="tableBtn">Review</button>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>1</td>
-                                 <td id="name">Mohamed</td>
-                                 <td>
-                                    <div class="active">Active</div>
-                                 </td>
-                                 <td>5</td>
-                                 <td>
-                                    <button id="tableBtn">Review</button>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>1</td>
-                                 <td id="name">Mohamed</td>
-                                 <td>
-                                    <div class="active">Active</div>
-                                 </td>
-                                 <td>5</td>
-                                 <td>
-                                    <button id="tableBtn">Review</button>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>1</td>
-                                 <td id="name">Mohamed</td>
-                                 <td>
-                                    <div class="active">Active</div>
-                                 </td>
-                                 <td>5</td>
-                                 <td>
-                                    <button id="tableBtn">Review</button>
-                                 </td>
-                              </tr>
+                              <?php
+                              $res = small_table_show($pdo);
+                              while ($result = $res->fetch()) {
+                                 echo "<tr>";
+                                 echo "<td>";
+                                 echo  isset($result['emp_id']) ? $result['emp_id'] : '-';
+                                 echo "</td>";
+                                 echo " <td >";
+                                 echo  isset($result['emp_name']) ? $result['emp_name'] : '-';
+                                 echo "</td>";
+                                 echo "<td>";
+                                 echo isset($result['dept_id']) ? $result['dept_id'] : '-';
+                                 echo "  </td>";
+                                 echo "<td>";
+                                 echo   "<div class='active'>";
+                                 echo isset($result['active_flag']) ? $result['active_flag'] : '-';
+                                 echo "</div>";
+                                 echo "</td>";
+                                 echo "<td>";
+                                 echo " <button id='tableBtn'><a href='../back_end/addReview.php'>Review</a></button>";
+                                 echo "</td>";
+                                 echo "</tr>";
+                              }
+                              ?>
                            </tbody>
                         </table>
                      </div>
@@ -229,19 +235,20 @@ require_once '../back_end/conn.php';
                               require_once '../database_for_php/dashboardInfo.php';
                               $result = getInfo($pdo);
 
-                              foreach ($result as $row):?>
+                              foreach ($result as $row): ?>
 
-                              <tr>
-                                 <td><?php echo $row['emp_id'];?></td>
-                                 <td id="name"><?php echo $row['name'];?></td>
-                                 <td><?php echo $row['dept_id'];?></td>
-                                 <td><?php echo is_null($row['manager_id']) ? 'empty' : $row['manager_id'];?></td>
-                                 <td><?php echo $row['dept_name'];?></td>
-                                 <td><?php echo $row['feedback'];?></td>
-                                 <td><?php echo $row['base_salary'];?></td>
-                              </tr>
+                                 <tr>
+                                    <td><?php echo $row['emp_id']; ?></td>
+                                    <td id="name"><?php echo $row['name']; ?></td>
+                                    <td><?php echo $row['dept_id']; ?></td>
 
-                              <?php endforeach;?>
+                                    <td><?php echo is_null($row['manager_id']) ? '-' : $row['manager_id']; ?></td>
+                                    <td><?php echo $row['dept_name']; ?></td>
+                                    <td><?php echo $row['feedback'] ?></td>
+                                    <td><?php echo $row['base_salary']; ?></td>
+                                 </tr>
+
+                              <?php endforeach; ?>
 
                            </tbody>
                         </table>

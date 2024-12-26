@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "/conn.php";
-require_once __DIR__ . "/token.php";
+require_once  "../back_end/conn.php";
+require_once  "../back_end/token.php";
 
 #_________following code must be in all pages__________
 
@@ -20,7 +20,9 @@ if (isset($_COOKIE['token'])) {
     session_destroy();
     # delete all user tokens
 
+
     setcookie("token", "", time() - 1, "/"); #expire cookie and token and delete from browser
+
 
     header("location: ../back_end/signin.php");
     exit;
@@ -30,62 +32,67 @@ if (isset($_COOKIE['token'])) {
 
 
 
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>EMS</title>
-   <meta http-equiv="refresh" content="3600">
-   <!--auto refresh the page-->
-   <link rel="icon" href="../webapp_img/employee-management-system-icon-hexa-color-_27374D-_1_ (1).ico"
-      type="image/ico">
-   <link rel="stylesheet" href="../front_end/signin.css">
-   <!-- must use "../" because if not the path will be localhost/webproject/back_end/front_end/signin.css-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMS</title>
+  <meta http-equiv="refresh" content="3600"><!--auto refresh the page-->
+  <link rel="icon" href="../webapp_img/employee-management-system-icon-hexa-color-_27374D-_1_ (1).ico" type="image/ico">
+  <link rel="stylesheet" href="../front_end/signin.css"> <!-- must use "../" because if not the path will be localhost/webproject/back_end/front_end/signin.css-->
 
 </head>
 
 <body>
 
-   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-      <div class="welcome">
-         <p><strong>Welcome Back</strong><br>Sign In To Your Account To Continue</p>
 
+
+  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+    <div class="welcome">
+      <p><strong>Welcome Back</strong><br>Sign In To Your Account To Continue</p>
+
+    </div>
+    <div class="signin"> <!--Sign in div-->
+      <!----------------------------image-------------------------------->
+      <div class="image">
+        <img src="../webapp_img/user.png" alt="user photo">
       </div>
-      <div class="signin">
-         <!--Sign in div-->
-         <!----------------------------image-------------------------------->
-         <div class="image">
-            <img src="../webapp_img/user.png" alt="user photo">
-         </div>
-         <!----------------------------username field-------------------------------->
-         <div class="username_txt">
-            <!-- <label for="username">Username</label> -->
-            <input type="text" name="username" id="username" placeholder="Username" value="<?php if (isset($_COOKIE['token'])) {
+      <!----------------------------username field-------------------------------->
+      <div class="username_txt">
+        <!-- <label for="username">Username</label> -->
+        <input type="text" name="username" id="username" placeholder="Username" value="<?php if (isset($_COOKIE['token'])) {
                                                                                           echo find_username_by_token($_COOKIE['token'], $pdo);
                                                                                         }   ?>">
-         </div>
-         <!----------------------------password field-------------------------------->
-         <div class="password_txt">
-            <!-- <label for="password">Password</label> -->
-            <input type="password" name="password" id="password" placeholder="Password" value="<?php if (isset($_COOKIE['token'])) {
+      </div>
+      <!----------------------------password field-------------------------------->
+      <div class="password_txt">
+        <!-- <label for="password">Password</label> -->
+        <input type="password" name="password" id="password" placeholder="Password" value="<?php if (isset($_COOKIE['token'])) {
                                                                                               echo find_password_by_token($_COOKIE['token'], $pdo);
                                                                                             }   ?>">
-         </div>
-         <!----------------------------check box-------------------------------->
-         <div class="remember_forget">
-            <input type="checkbox" name="remember">
-            <label>Remember Me</label>
-         </div>
-         <!----------------------------signin button-------------------------------->
-         <input type="submit" name="submit" value="Sign In" class="btn">
-         <br>
-
       </div>
+      <!----------------------------check box-------------------------------->
+      <div class="remember_forget">
+        <input type="checkbox" name="remember">
+        <label>Remember Me</label>
+      </div>
+      <!----------------------------signin button-------------------------------->
+      <input type="submit" name="submit" value="Sign In" class="btn">
+      <br>
 
-   </form>
+
+
+    </div>
+
+  </form>
+
+
 
 </body>
 
@@ -124,8 +131,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       return;
     }
 
+
+
     if ($GLOBALS['stmt']->rowCount() > 0) {  #ensure that sql display the unique row
+
       $rs = $GLOBALS['stmt']->fetch(); # go to next row
+
 
       if (isset($_POST["remember"]) && (empty($_COOKIE['token']))) { # if  rememeber checkbox is on  and not have a token or session id
         $token = generate_tokens();
@@ -156,7 +167,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['pat'] = $_SERVER["REMOTE_ADDR"] . ":" . $_SERVER['REMOTE_PORT'];
         $_SESSION['REMOTE_USER'] = $_SERVER['REMOTE_USER'];
         $_SESSION['REMOTE_PASSWORD'] = $_SERVER['REMOTE_PASSWORD'];
-        $_SESSION['employee_num'] = get_employees_num($pdo);
+        $num = get_employees_num($pdo);
+        $_SESSION['employee_num'] = $num['cnt'];
         $_SESSION['image'] = base64_encode($rs['image']);
         $_SESSION['position'] = $rs['position'];
         $_SESSION['fname'] = $rs['fname'];
@@ -165,15 +177,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['branch_location'] = $rs['branch_location'];
         $_SESSION['dept_id'] = $rs['dept_id'];
 
+
+
+
+
         update_emp_status($rs['emp_id'], $_SESSION['active'], $pdo);
       }
       #session_regenerate_id();
       $pdo = null;
-      header('Location: ../back_end/dashboard.php');
-      exit;
-    }
+      if ($_SESSION['position'] == 'admin' || $_SESSION['position'] == 'manager') {
+        header('Location: ../back_end/dashboard.php');
+        exit;
+      } else {
+        header('Location:../back_end/leaveRequest.php');
+        exit;
+      }
+    } else {
 
-    else {
+
       echo "<div class='error' >";
       echo "Invalid Username or Password , Please Try Again";
       echo "</div>";

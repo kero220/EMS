@@ -13,12 +13,6 @@ document.querySelectorAll("a.mainLink").forEach(function (mainLink) {
     }
   });
 });
-let inputFile = document.getElementById("upload");
-let fileName = document.getElementById("fileName");
-inputFile.addEventListener("change", (event) => {
-  console.log(event.target.files);
-  fileName.textContent = event.target.files[0].name;
-});
 function myFunction() {
   const x = document.querySelector(".list");
   if (x.style.display === "none") {
@@ -47,3 +41,10 @@ document.getElementById("date").addEventListener("input", function () {
     checkbox.required = true;
   }
 });
+//accept or reject leave
+function acc() {
+  alert("Leave Request Was Accepted");
+}
+function rej() {
+  alert("Leave Request Was rejected");
+}
