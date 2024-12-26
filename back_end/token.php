@@ -248,12 +248,14 @@ function get_last_connection_of_user($emp_id, $pdo)
 }
 function get_employees_num($pdo)
 {
-  $sql = "select count(*) from employees";
+  $sql = "select count(emp_id) as cnt from employees";
 
   $stmt = $pdo->prepare($sql);
 
   $stmt->execute();
 
-  return $stmt->fetch();
+  $result = $stmt->fetch();
+
+  return $result;
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 require_once  "../back_end/conn.php";
-require_once  "../database_for_php/editdepartment_dp.php";
+require_once  "../database_for_php/adddepartment_dp.php";
 date_default_timezone_set("Africa/Cairo"); # set time() to egypt timestamp
 session_start(); #to get session permission
 # check security
@@ -36,7 +36,6 @@ if (isset($_COOKIE['token'])) {
 
 ?>
 
-
 <html lang="en">
 
 <head>
@@ -46,8 +45,8 @@ if (isset($_COOKIE['token'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
     <link rel="stylesheet" href="../front_end/editUser.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet" />
-    <link rel="icon" href="../webapp_img/employee-management-system-icon-hexa-color-_27374D-_1_ (1).ico" type="image/ico">
     <meta http-equiv="refresh" content="3600">
+    <link rel="icon" href="../webapp_img/employee-management-system-icon-hexa-color-_27374D-_1_ (1).ico" type="image/ico">
 </head>
 
 <body>
@@ -56,7 +55,7 @@ if (isset($_COOKIE['token'])) {
             <div><img src="../front_end/pngegg.png" alt=""></div>
         </button>
         <div class="list">
-            <a href="dashboard.php" class="dashboard_link block"><i class="fa-solid fa-sliders"></i> Dashboard</a>
+            <a href="../back_end/dashboard.php" class="dashboard_link block"><i class="fa-solid fa-sliders"></i> Dashboard</a>
             <!----user managment---->
             <a href="#" class="mainLink block">User Managment</a>
             <div id="linksList">
@@ -89,7 +88,7 @@ if (isset($_COOKIE['token'])) {
             <header class="z-10">
                 <!--<a href="#"><i class="fa-solid fa-plus ml-8"></i> New Item</a>-->
                 <div class="navbar flex items-center gap-4">
-                <?php echo "<img id='user_img' src='data:image/jpeg;base64," .   $_SESSION['image']  .  "'alt='User Image' class='w-10'>" ?>
+                    <?php echo "<img id='user_img' src='data:image/jpeg;base64," .   $_SESSION['image']  .  "'alt='User Image' class='w-10'>" ?>
                     <label for="username"><?php echo $_SESSION['username']; ?></label>
                     <a href="../back_end/signin.php" class="text-red-500 font-bold">Sign Out</a>
                 </div>
@@ -98,58 +97,37 @@ if (isset($_COOKIE['token'])) {
             <section>
                 <div id="container" class="m-auto mt-20 rounded-xl">
                     <h1 class="text-center text-2xl p-4 m-4 font-semibold">
-                        Edit Departments Info
+                        Add Department
                     </h1>
-                    <div id="wrapper">
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data" class="flex flex-col gap-6 ">
-                            <input type="number" name="dept_id" id="departmentID" placeholder="Department ID"
-                                class="rounded-lg text-center font-bold p-2 m-4 w-50 ">
-                            <input type="text" name="dept_name" id="Dept_name" placeholder="Department Name"
-                                class="rounded-lg text-center font-bold p-2 m-4 w-50">
-                            <input type="number" name="manager_id" id="manager_id" placeholder="Manager ID"
-                                class="rounded-lg text-center font-bold p-2 m-4 w-50">
+                    <div class="p-8">
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data" id="manageEmployeesForm" class="flex flex-col gap-6">
+
+                            <input type="text" id="Dept_name" name="dept_name" placeholder="Department Name"
+                                class="rounded-lg text-center font-bold p-2 m-4 w-50" required />
+                            <input type="number" id="manager_id" name="manager_id" placeholder="Manager ID"
+                                class="rounded-lg text-center font-bold p-2 m-4 w-50" required />
 
                             <button type="submit" name="submit" id="submitBtn"
-                                class="w-4/6 m-auto p-2 text-white font-bold rounded-2xl">
+                                class="w-4/6 m-auto p-2 text-white font-bold rounded-2xl ">
                                 Submit
                             </button>
                             <?php
-
                             if (isset($_POST['submit'])) {
-                                #echo isset($_POST['dept_name']);
-                                #echo isset($_POST['manager_id']);
-                                #echo isset($_POST['dept_id']);
 
 
-
-                                if (
-
-                                    isset($_POST['dept_name']) &&  $_POST['dept_name'] != '' &&
-                                    isset($_POST['manager_id']) && $_POST['manager_id'] != '' &&
-                                    isset($_POST['dept_id']) && $_POST['dept_id'] != ''
-                                ) {
-                                    if (update_dept(
-                                        $_POST['dept_id'],
-                                        $_POST['dept_name'],
-                                        $_POST['manager_id'],
-                                        $pdo
-                                    )) {
-                                        echo "<div class='success' >";
-                                        echo "Department Updated Successfully";
-                                        echo "</div>";
-                                    } else {
-                                        echo "<div class='error'>";
-                                        echo "There Was An Error In Update";
-                                        echo "</div>";
-                                    }
+                                if (insert_department($_POST['dept_name'], $_POST['manager_id'], $pdo)) {
+                                    echo "<div style='color:green'>";
+                                    echo "Department Added Successfully✅";
+                                    echo "</div>";
                                 } else {
-
-
-                                    echo "<div class='error'>";
-                                    echo "One Or More Fields Are Missing , Please Try Again";
+                                    echo "<div style='color:red'>";
+                                    echo "Error Existed , Please Try Again!";
                                     echo "</div>";
                                 }
                             }
+
+
+
                             ?>
                         </form>
                     </div>
@@ -160,7 +138,7 @@ if (isset($_COOKIE['token'])) {
                     <h2>EMS&copy;</h2>
                 </div>
                 <ul class="Fnavbar">
-                    <li><a href="../back_end/support.php">Support</a></li>
+                    <li><a href="../back_end/">Support</a></li>
                     <li><a href="../back_end/privacy.php">Privacy</a></li>
                     <li><a href="../back_end/terms.php">terms</a></li>
                 </ul>
