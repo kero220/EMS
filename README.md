@@ -10,7 +10,8 @@ A simple system for managing employee data, attendance, and payroll.
 *   Reporting (basic reporting functionalities)
 
 ### This project is an Employee Management System built using:
-#### [Programming Language, e.g., Java/Spring, PHP/Laravel] and a [Database, e.g., MySQL] database. It provides a web interface for managing employee data, attendance, and payroll. 
+* [Programming Language, e.g., Java/Spring, PHP/Laravel]
+*  [Database, e.g., MySQL] database. It provides a web interface for managing employee data, attendance, and payroll.
 #### Key features include:
 
 *   Employee data management
